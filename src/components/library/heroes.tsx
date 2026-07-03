@@ -89,12 +89,12 @@ export function SplitHero() {
                 <span className="text-slate-300">{"({ children }) {"}</span>{"\n"}
                 <span className="text-slate-300">{"  return ("}</span>{"\n"}
                 <span className="text-slate-300">{"    <"}</span><span className="text-indigo-400">button</span>{"\n"}
-                <span className="text-emerald-400">{"      className"}</span><span className="text-slate-300">{"="}</span><span className="text-amber-300">{"{"}\`"}</span>{"\n"}
+                <span className="text-emerald-400">{"      className"}</span><span className="text-slate-300">{"="}</span><span className="text-amber-300">{"{"}{"`"}</span>{"\n"}
                 <span className="text-amber-300">{"        px-6 py-2.5 rounded-xl"}</span>{"\n"}
                 <span className="text-amber-300">{"        bg-white/10 backdrop-blur-sm"}</span>{"\n"}
                 <span className="text-amber-300">{"        text-white font-medium"}</span>{"\n"}
-                <span className="text-amber-300">{"      "\`}</span><span className="text-slate-300">{"}"}</span>{"\n"}
-                <span className="text-slate-300">{"    >"}{children}</span>{"\n"}
+                <span className="text-amber-300">{"      "}{"`"}</span><span className="text-slate-300">{"}"}</span>{"\n"}
+                <span className="text-slate-300">{"    >{children}"}</span>{"\n"}
                 <span className="text-slate-300">{"    </"}</span><span className="text-indigo-400">button</span><span className="text-slate-300">{">"}</span>{"\n"}
                 <span className="text-slate-300">{"  );"}</span>{"\n"}
                 <span className="text-slate-300">{"}"}</span>

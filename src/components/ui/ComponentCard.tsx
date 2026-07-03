@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Badge } from "./Badge";
 import { cn, formatNumber } from "@/lib/utils";
 import type { ComponentMetadata } from "@/types";
+import { getPreview } from "@/data/preview-registry";
 
 interface ComponentCardProps {
   component: ComponentMetadata;
@@ -24,6 +25,8 @@ export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const preview = getPreview(component.id);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -37,18 +40,12 @@ export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
           "transition-all duration-300"
         )}>
           {/* Preview area */}
-          <div className="relative h-44 bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--brand)/5_0%,transparent_70%)]" />
-            <span className="text-4xl opacity-20 group-hover:opacity-30 transition-opacity select-none">
-              {getCategoryEmoji(component.category)}
-            </span>
-            {/* Hover overlay */}
-            <div className="absolute inset-0 bg-brand/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-brand text-white shadow-lg">
-                <Eye size={12} /> Preview
-              </span>
+          {preview ?? (
+            <div className="relative h-44 bg-linear-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--brand)/5_0%,transparent_70%)]" />
+              <span className="text-4xl opacity-20 group-hover:opacity-30 transition-opacity select-none">🧩</span>
             </div>
-          </div>
+          )}
 
           {/* Info */}
           <div className="p-4">
@@ -97,17 +94,4 @@ export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
       </Link>
     </motion.div>
   );
-}
-
-function getCategoryEmoji(category: string): string {
-  const map: Record<string, string> = {
-    buttons: "🔘", cards: "🃏", forms: "📝", inputs: "✏️",
-    navbars: "🧭", footers: "📄", heroes: "✨", pricing: "💳",
-    testimonials: "💬", dashboards: "📊", tables: "📋", charts: "📈",
-    badges: "🏷️", avatars: "👤", alerts: "🔔", modals: "🪟",
-    drawers: "📂", accordions: "📚", dropdowns: "📋", breadcrumbs: "🔗",
-    pagination: "📑", loaders: "⏳", skeletons: "💀", tooltips: "💭",
-    tabs: "🗂️", carousels: "🎠",
-  };
-  return map[category] ?? "🧩";
 }

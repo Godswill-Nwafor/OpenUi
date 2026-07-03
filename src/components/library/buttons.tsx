@@ -224,7 +224,7 @@ export function PrimaryButtonPreview() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 p-4 bg-gray-950">
       <PrimaryButton>Get Started</PrimaryButton>
-      <PrimaryButton loading loadingText="Loading...">Loading</PrimaryButton>
+      <PrimaryButton loading>Loading...</PrimaryButton>
       <PrimaryButton disabled>Disabled</PrimaryButton>
     </div>
   );
