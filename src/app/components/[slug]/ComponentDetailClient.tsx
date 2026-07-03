@@ -360,7 +360,7 @@ export function ComponentDetailClient({ comp, related }: Props) {
               </div>
 
               <Link
-                href={`https://github.com/openui-hub/openui-hub/tree/main/components/${metadata.category}/${metadata.id}`}
+                href={`https://github.com/Mtu-Cse406-OpenSource-team/Openui/tree/main/components/${metadata.category}/${metadata.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-border text-sm font-medium hover:bg-accent transition-colors"

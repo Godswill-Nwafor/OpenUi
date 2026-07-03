@@ -38,8 +38,8 @@ const metadataExample = `{
 }`;
 
 const gitCommands = `# 1. Fork and clone
-git clone https://github.com/YOUR_USERNAME/openui-hub.git
-cd openui-hub && npm install
+git clone https://github.com/YOUR_USERNAME/Openui.git
+cd Openui && npm install
 
 # 2. Create a feature branch
 git checkout -b feature/MyButtonComponent

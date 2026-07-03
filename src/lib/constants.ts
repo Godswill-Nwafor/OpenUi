@@ -5,7 +5,7 @@ export const SITE_TAGLINE = "Build Beautiful Interfaces Together.";
 export const SITE_DESCRIPTION =
   "A production-quality open-source UI components library. Browse, preview, copy, and contribute beautiful React components.";
 export const SITE_URL = "https://openui-hub.vercel.app";
-export const GITHUB_REPO = "https://github.com/openui-hub/openui-hub";
+export const GITHUB_REPO = "https://github.com/Mtu-Cse406-OpenSource-team/Openui";
 
 export const CATEGORIES: CategoryInfo[] = [
   { id: "buttons", label: "Buttons", description: "Interactive button components with various styles and states", icon: "MousePointerClick", count: 10 },
@@ -54,5 +54,5 @@ export const NAV_LINKS = [
   { href: "/about", label: "About" },
 ];
 
-export const GITHUB_OWNER = "openui-hub";
-export const GITHUB_REPO_NAME = "openui-hub";
+export const GITHUB_OWNER = "Mtu-Cse406-OpenSource-team";
+export const GITHUB_REPO_NAME = "Openui";
