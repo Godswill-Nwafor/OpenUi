@@ -8,6 +8,7 @@ import {
   User, Calendar, Package, Code2, BookOpen, Layers, Eye,
   ChevronRight, ExternalLink
 } from "lucide-react";
+import { getDetailPreview } from "@/data/preview-registry";
 import { getContributorByUsername } from "@/data/contributors";
 import { getGitHubAvatarUrl, getGitHubProfileUrl } from "@/lib/github";
 import { CodeBlock } from "@/components/ui/CodeBlock";
@@ -212,15 +213,28 @@ export function ComponentDetailClient({ comp, related }: Props) {
 
             {/* Tab content */}
             <motion.div key={activeTab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
-              {activeTab === "preview" && (
-                <div className="space-y-4">
-                  <LivePreviewPlaceholder name={metadata.name} />
-                  <p className="text-xs text-muted-foreground">
-                    Demo code — paste this into your project to see it in action:
-                  </p>
-                  <CodeBlock code={demoCode} language="tsx" filename={`${metadata.id}.demo.tsx`} />
-                </div>
-              )}
+              {activeTab === "preview" && (() => {
+                const detail = getDetailPreview(metadata.id);
+                return (
+                  <div className="space-y-4">
+                    {detail ? (
+                      <div
+                        className={`rounded-xl border border-border overflow-auto ${detail.bg}`}
+                        style={{ minHeight: "320px", maxHeight: "640px" }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {detail.node}
+                      </div>
+                    ) : (
+                      <LivePreviewPlaceholder name={metadata.name} />
+                    )}
+                    <p className="text-xs text-muted-foreground">
+                      Demo code: paste this into your project to see it in action:
+                    </p>
+                    <CodeBlock code={demoCode} language="tsx" filename={`${metadata.id}.demo.tsx`} />
+                  </div>
+                );
+              })()}
 
               {activeTab === "code" && (
                 <CodeBlock code={code} language="tsx" filename={`${metadata.id}.tsx`} />
@@ -366,8 +380,8 @@ export function ComponentDetailClient({ comp, related }: Props) {
                       href={`/components/${rel.id}`}
                       className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-brand/40 hover:bg-card transition-all"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center text-lg shrink-0">
-                        🧩
+                      <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center shrink-0">
+                        <Layers size={16} className="text-brand" />
                       </div>
                       <div className="min-w-0">
                         <p className="text-sm font-medium truncate">{rel.name}</p>
