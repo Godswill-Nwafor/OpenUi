@@ -48,7 +48,7 @@ import {
 type Config = { render: () => ReactNode; scale: number; bg: string };
 
 const light = "bg-secondary";
-const dark = "bg-gray-950";
+const dark = "bg-gray-50";
 
 const configs: Record<string, Config> = {
   // Buttons — light bg
@@ -107,7 +107,7 @@ const configs: Record<string, Config> = {
   "minimal-footer":  { render: () => <MinimalFooterPreview />, scale: 0.5, bg: dark },
   "mega-footer":     { render: () => <MegaFooterPreview />,    scale: 0.5, bg: dark },
   "cta-footer":      { render: () => <CTAFooterPreview />,     scale: 0.5, bg: dark },
-  "dark-footer":     { render: () => <DarkFooterPreview />,    scale: 0.5, bg: "bg-black" },
+  "dark-footer":     { render: () => <DarkFooterPreview />,    scale: 0.5, bg: dark },
   "app-footer":      { render: () => <AppFooterPreview />,     scale: 0.5, bg: dark },
 
   // Heroes — dark

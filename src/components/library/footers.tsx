@@ -1,16 +1,16 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { Github, Twitter, Layers, ArrowRight, Star, Home, Search, Bell, User } from "lucide-react";
 
 // MinimalFooter
 export function MinimalFooter() {
   return (
-    <footer className="border-t border-white/10 bg-gray-950">
+    <footer className="border-t border-gray-200 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-sm text-slate-500">© {new Date().getFullYear()} OpenUI Hub. MIT License.</p>
+        <p className="text-sm text-gray-400">© {new Date().getFullYear()} OpenUI Hub. MIT License.</p>
         <div className="flex items-center gap-3">
-          <a href="#" className="text-slate-500 hover:text-white transition-colors"><Github size={16} /></a>
-          <a href="#" className="text-slate-500 hover:text-white transition-colors"><Twitter size={16} /></a>
+          <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors"><Github size={16} /></a>
+          <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors"><Twitter size={16} /></a>
         </div>
       </div>
     </footer>
@@ -26,34 +26,34 @@ const megaLinks = {
 };
 export function MegaFooter() {
   return (
-    <footer className="border-t border-white/10 bg-gray-950">
+    <footer className="border-t border-gray-200 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 py-14 grid grid-cols-2 md:grid-cols-6 gap-10">
         <div className="col-span-2">
           <div className="flex items-center gap-2.5 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center"><Layers size={16} className="text-white" /></div>
-            <span className="font-bold text-white">OpenUI Hub</span>
+            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center"><Layers size={16} className="text-gray-900" /></div>
+            <span className="font-bold text-gray-900">OpenUI Hub</span>
           </div>
-          <p className="text-sm text-slate-400 leading-relaxed mb-5">Build beautiful interfaces together. Open source, forever.</p>
+          <p className="text-sm text-gray-500 leading-relaxed mb-5">Build beautiful interfaces together. Open source, forever.</p>
           <div className="flex gap-2">
-            <input type="email" placeholder="your@email.com" className="flex-1 h-9 px-3 rounded-lg border border-white/10 bg-gray-900 text-white text-sm placeholder:text-slate-600 outline-none focus:border-indigo-500" />
+            <input type="email" placeholder="your@email.com" className="flex-1 h-9 px-3 rounded-lg border border-gray-200 bg-white text-gray-900 text-sm placeholder:text-gray-400 outline-none focus:border-indigo-500" />
             <button className="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shrink-0"><ArrowRight size={14} /></button>
           </div>
-          <p className="text-xs text-slate-600 mt-1.5">Subscribe to updates. No spam.</p>
+          <p className="text-xs text-gray-400 mt-1.5">Subscribe to updates. No spam.</p>
         </div>
         {Object.entries(megaLinks).map(([section, items]) => (
           <div key={section}>
-            <h3 className="font-semibold text-white text-sm mb-3">{section}</h3>
+            <h3 className="font-semibold text-gray-900 text-sm mb-3">{section}</h3>
             <ul className="space-y-2.5">
-              {items.map(item => <li key={item}><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">{item}</a></li>)}
+              {items.map(item => <li key={item}><a href="#" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">{item}</a></li>)}
             </ul>
           </div>
         ))}
       </div>
-      <div className="border-t border-white/10 px-4 py-4 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600">
+      <div className="border-t border-gray-200 px-4 py-4 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-400">
         <p>© {new Date().getFullYear()} OpenUI Hub. Released under MIT.</p>
         <div className="flex gap-3">
-          <a href="#" className="hover:text-white transition-colors"><Github size={14} /></a>
-          <a href="#" className="hover:text-white transition-colors"><Twitter size={14} /></a>
+          <a href="#" className="hover:text-gray-900 transition-colors"><Github size={14} /></a>
+          <a href="#" className="hover:text-gray-900 transition-colors"><Twitter size={14} /></a>
         </div>
       </div>
     </footer>
@@ -63,20 +63,20 @@ export function MegaFooter() {
 // CTAFooter
 export function CTAFooter() {
   return (
-    <footer className="bg-gray-950 border-t border-white/10">
+    <footer className="bg-gray-50 border-t border-gray-200">
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <p className="text-sm font-medium text-indigo-400 uppercase tracking-widest mb-4">Open Source</p>
-        <h2 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">Start building beautiful<br />interfaces today.</h2>
-        <p className="text-slate-400 text-lg mb-10">Free forever. No credit card. Join thousands of developers.</p>
+        <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-5 leading-tight">Start building beautiful<br />interfaces today.</h2>
+        <p className="text-gray-500 text-lg mb-10">Free forever. No credit card. Join thousands of developers.</p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <a href="/components" className="flex items-center gap-2 h-12 px-7 rounded-2xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 shadow-lg shadow-indigo-500/20 transition-all">Browse Components <ArrowRight size={15} /></a>
-          <a href="#" className="flex items-center gap-2 h-12 px-7 rounded-2xl border border-white/15 text-slate-300 font-semibold hover:bg-white/5 transition-all"><Github size={16} /> Star on GitHub</a>
+          <a href="#" className="flex items-center gap-2 h-12 px-7 rounded-2xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all"><Github size={16} /> Star on GitHub</a>
         </div>
       </div>
-      <div className="border-t border-white/10 px-4 py-4 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-slate-500">
+      <div className="border-t border-gray-200 px-4 py-4 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-400">
         <p>© {new Date().getFullYear()} OpenUI Hub</p>
         <div className="flex gap-6">
-          {["Privacy", "Terms", "License"].map(l => <a key={l} href="#" className="hover:text-white transition-colors">{l}</a>)}
+          {["Privacy", "Terms", "License"].map(l => <a key={l} href="#" className="hover:text-gray-900 transition-colors">{l}</a>)}
         </div>
       </div>
     </footer>
@@ -86,24 +86,24 @@ export function CTAFooter() {
 // DarkBrandFooter
 export function DarkBrandFooter() {
   return (
-    <footer className="relative bg-black border-t border-white/5 overflow-hidden">
+    <footer className="relative bg-gray-50 border-t border-gray-100 overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-indigo-600/15 blur-3xl rounded-full" />
       <div className="relative z-10 max-w-4xl mx-auto px-4 py-16 text-center">
         <div className="flex items-center justify-center gap-2.5 mb-5">
-          <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center"><Layers size={18} className="text-white" /></div>
-          <span className="text-xl font-bold text-white">OpenUI Hub</span>
+          <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center"><Layers size={18} className="text-gray-900" /></div>
+          <span className="text-xl font-bold text-gray-900">OpenUI Hub</span>
         </div>
-        <p className="text-slate-400 max-w-sm mx-auto text-sm leading-relaxed mb-6">The open-source UI library used by developers worldwide.</p>
+        <p className="text-gray-500 max-w-sm mx-auto text-sm leading-relaxed mb-6">The open-source UI library used by developers worldwide.</p>
         <div className="flex items-center justify-center gap-1 mb-2">
           {[...Array(5)].map((_, i) => <Star key={i} size={14} className="text-amber-400 fill-amber-400" />)}
         </div>
-        <p className="text-xs text-slate-500 mb-8">Loved by 10,000+ developers</p>
-        <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 mb-12">
-          {["Components", "Documentation", "Contribute", "License", "GitHub"].map(l => <a key={l} href="#" className="hover:text-white transition-colors">{l}</a>)}
+        <p className="text-xs text-gray-400 mb-8">Loved by 10,000+ developers</p>
+        <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400 mb-12">
+          {["Components", "Documentation", "Contribute", "License", "GitHub"].map(l => <a key={l} href="#" className="hover:text-gray-900 transition-colors">{l}</a>)}
         </div>
-        <div className="pt-6 border-t border-white/5 flex items-center justify-between text-xs text-slate-600">
+        <div className="pt-6 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
           <p>© {new Date().getFullYear()} OpenUI Hub. MIT License.</p>
-          <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors"><Github size={13} /> Source on GitHub</a>
+          <a href="#" className="flex items-center gap-1.5 hover:text-gray-900 transition-colors"><Github size={13} /> Source on GitHub</a>
         </div>
       </div>
     </footer>
@@ -121,11 +121,11 @@ const footerTabs = [
 export function AppFooterBar() {
   const [active, setActive] = useState("Home");
   return (
-    <footer className="absolute bottom-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-xl border-t border-white/10">
+    <footer className="absolute bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-gray-200">
       <div className="flex items-center justify-around px-2 py-2 max-w-md mx-auto">
         {footerTabs.map(({ icon: Icon, label, badge }) => (
           <button key={label} onClick={() => setActive(label)}
-            className={`relative flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors ${active === label ? "text-indigo-400" : "text-slate-500 hover:text-slate-300"}`}>
+            className={`relative flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors ${active === label ? "text-indigo-400" : "text-gray-400 hover:text-gray-700"}`}>
             <div className="relative">
               <Icon size={20} />
               {badge && <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500 text-white text-[9px] flex items-center justify-center font-bold">{badge}</span>}
@@ -143,7 +143,7 @@ export function AppFooterBar() {
 
 export function MinimalFooterPreview() {
   return (
-    <div className="flex flex-col justify-end h-full bg-gray-950">
+    <div className="flex flex-col justify-end h-full bg-gray-50">
       <MinimalFooter />
     </div>
   );
@@ -151,7 +151,7 @@ export function MinimalFooterPreview() {
 
 export function MegaFooterPreview() {
   return (
-    <div className="bg-gray-950">
+    <div className="bg-gray-50">
       <MegaFooter />
     </div>
   );
@@ -159,7 +159,7 @@ export function MegaFooterPreview() {
 
 export function CTAFooterPreview() {
   return (
-    <div className="bg-gray-950">
+    <div className="bg-gray-50">
       <CTAFooter />
     </div>
   );
@@ -167,7 +167,7 @@ export function CTAFooterPreview() {
 
 export function DarkFooterPreview() {
   return (
-    <div className="bg-black">
+    <div className="bg-gray-50">
       <DarkBrandFooter />
     </div>
   );
@@ -175,8 +175,8 @@ export function DarkFooterPreview() {
 
 export function AppFooterPreview() {
   return (
-    <div className="relative bg-gray-950 h-full">
-      <div className="flex items-center justify-center h-full text-slate-600 text-sm pb-16">App content area</div>
+    <div className="relative bg-gray-50 h-full">
+      <div className="flex items-center justify-center h-full text-gray-400 text-sm pb-16">App content area</div>
       <AppFooterBar />
     </div>
   );
