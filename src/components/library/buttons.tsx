@@ -222,7 +222,7 @@ export function SplitButton({ label, onMainClick, actions }: { label: string; on
 
 export function PrimaryButtonPreview() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 p-4 bg-gray-950">
+    <div className="flex flex-wrap items-center justify-center gap-3 p-5">
       <PrimaryButton>Get Started</PrimaryButton>
       <PrimaryButton loading>Loading...</PrimaryButton>
       <PrimaryButton disabled>Disabled</PrimaryButton>
@@ -232,7 +232,7 @@ export function PrimaryButtonPreview() {
 
 export function OutlineButtonPreview() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 p-4 bg-gray-950">
+    <div className="flex flex-wrap items-center justify-center gap-3 p-5">
       <OutlineButton>Learn More</OutlineButton>
       <OutlineButton disabled>Disabled</OutlineButton>
     </div>
@@ -241,7 +241,7 @@ export function OutlineButtonPreview() {
 
 export function GhostButtonPreview() {
   return (
-    <div className="flex items-center justify-center gap-3 p-4 bg-gray-950">
+    <div className="flex items-center justify-center gap-3 p-5">
       <GhostButton>Cancel</GhostButton>
       <GhostButton><Settings size={16} /> Settings</GhostButton>
     </div>
@@ -250,7 +250,7 @@ export function GhostButtonPreview() {
 
 export function GradientButtonPreview() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 p-4 bg-gray-950">
+    <div className="flex flex-wrap items-center justify-center gap-3 p-5">
       <GradientButton><Sparkles size={16} /> Get Started Free</GradientButton>
       <GradientButton>Upgrade Now</GradientButton>
     </div>
@@ -259,7 +259,7 @@ export function GradientButtonPreview() {
 
 export function IconButtonPreview() {
   return (
-    <div className="flex items-center justify-center gap-2 p-4 bg-gray-950">
+    <div className="flex items-center justify-center gap-2 p-5">
       <IconButton tooltip="Search"><Search size={16} /></IconButton>
       <IconButton tooltip="Notifications" variant="outline"><Bell size={16} /></IconButton>
       <IconButton tooltip="Favourite" variant="solid"><Heart size={16} /></IconButton>
@@ -270,7 +270,7 @@ export function IconButtonPreview() {
 
 export function DangerButtonPreview() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 p-4 bg-gray-950">
+    <div className="flex flex-wrap items-center justify-center gap-3 p-5">
       <DangerButton><Trash2 size={16} /> Delete Account</DangerButton>
       <DangerButton disabled><Trash2 size={16} /> Disabled</DangerButton>
     </div>
@@ -279,7 +279,7 @@ export function DangerButtonPreview() {
 
 export function LoadingButtonPreview() {
   return (
-    <div className="flex items-center justify-center p-4 bg-gray-950">
+    <div className="flex items-center justify-center p-5">
       <LoadingButton loadingText="Saving..." onClickAsync={() => new Promise(r => setTimeout(r, 2000))}>
         Save Changes
       </LoadingButton>
@@ -291,7 +291,7 @@ export function PillButtonPreview() {
   const [active, setActive] = useState("All");
   const filters = ["All", "React", "Popular", "New", "Trending"];
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 p-4 bg-gray-950">
+    <div className="flex flex-wrap items-center justify-center gap-2 p-5">
       {filters.map(f => (
         <PillButton key={f} active={active === f} onClick={() => setActive(f)}>{f}</PillButton>
       ))}
@@ -301,7 +301,7 @@ export function PillButtonPreview() {
 
 export function SocialButtonPreview() {
   return (
-    <div className="flex flex-col gap-2 p-4 bg-gray-950 max-w-xs mx-auto w-full">
+    <div className="flex flex-col gap-2 p-5 max-w-xs mx-auto w-full">
       <SocialButton provider="github" />
       <SocialButton provider="google" />
       <SocialButton provider="twitter" />
@@ -311,7 +311,7 @@ export function SocialButtonPreview() {
 
 export function SplitButtonPreview() {
   return (
-    <div className="flex items-center justify-center p-4 bg-gray-950">
+    <div className="flex items-center justify-center p-5">
       <SplitButton
         label="Deploy"
         onMainClick={() => {}}

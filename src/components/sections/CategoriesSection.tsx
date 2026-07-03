@@ -61,7 +61,7 @@ export function CategoriesSection() {
           </p>
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">Browse by Category</h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            26 categories of production-ready components, from simple buttons to full dashboards.
+            26 categories of production ready components, from simple buttons to full dashboards.
           </p>
         </motion.div>
 

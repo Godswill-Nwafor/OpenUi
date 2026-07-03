@@ -11,7 +11,7 @@ export const formComponents: ComponentDoc[] = [
       version: "1.0.0",
       category: "forms",
       tags: ["form", "login", "auth", "email", "password", "validation"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 4231, likes: 367,
     },
     code: `"use client";
@@ -135,7 +135,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "forms",
       tags: ["form", "contact", "email", "message", "textarea"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 2341, likes: 189,
     },
     code: `"use client";
@@ -241,7 +241,7 @@ export default function Demo() { return <div className="bg-gray-950 p-8 rounded-
       version: "1.0.0",
       category: "forms",
       tags: ["form", "signup", "register", "multi-step", "wizard", "onboarding"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 2876, likes: 241,
     },
     code: `"use client";
@@ -363,7 +363,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "forms",
       tags: ["form", "search", "filter", "advanced", "query"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1432, likes: 118,
     },
     code: `"use client";
@@ -448,7 +448,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "forms",
       tags: ["form", "settings", "profile", "toggle", "preferences"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1876, likes: 154,
     },
     code: `"use client";

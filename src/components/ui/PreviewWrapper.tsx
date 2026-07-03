@@ -10,7 +10,7 @@ interface PreviewWrapperProps {
 export function PreviewWrapper({
   children,
   scale,
-  bg = "bg-gray-950",
+  bg = "bg-secondary",
   center = true,
 }: PreviewWrapperProps) {
   if (scale !== undefined) {

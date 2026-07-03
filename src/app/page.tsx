@@ -9,9 +9,9 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "OpenUI Hub — Build Beautiful Interfaces Together",
+  title: "OpenUI Hub: Build Beautiful Interfaces Together",
   description:
-    "A production-quality open-source UI component library. Browse 60+ React components, preview live, copy code, and contribute your own.",
+    "A production quality open source UI component library. Browse 60+ React components, preview live, copy code, and contribute your own.",
 };
 
 export default function HomePage() {

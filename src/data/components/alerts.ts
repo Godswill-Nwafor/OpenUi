@@ -11,7 +11,7 @@ export const alertComponents: ComponentDoc[] = [
       version: "1.0.0",
       category: "alerts",
       tags: ["alert", "notification", "banner", "inline", "status"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1876, likes: 154,
     },
     code: `"use client";
@@ -83,7 +83,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "alerts",
       tags: ["alert", "toast", "notification", "auto-dismiss", "fixed"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 2341, likes: 198,
     },
     code: `"use client";
@@ -168,7 +168,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "alerts",
       tags: ["alert", "banner", "announcement", "site-wide", "promo"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 987, likes: 78,
     },
     code: `"use client";
@@ -237,7 +237,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "alerts",
       tags: ["alert", "dialog", "confirm", "destructive", "modal"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1432, likes: 112,
     },
     code: `"use client";
@@ -328,7 +328,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "alerts",
       tags: ["alert", "progress", "timer", "animated", "notification"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 743, likes: 58,
     },
     code: `"use client";

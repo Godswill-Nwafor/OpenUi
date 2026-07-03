@@ -47,7 +47,7 @@ export default function ComponentsPage() {
         <div className="max-w-7xl mx-auto px-4 py-10">
           <h1 className="text-4xl font-bold mb-2">UI Components</h1>
           <p className="text-muted-foreground mb-8">
-            {allComponents.length} production-ready components across 26 categories.
+            {allComponents.length} production ready components across 26 categories.
           </p>
 
           {/* Search + filters row */}

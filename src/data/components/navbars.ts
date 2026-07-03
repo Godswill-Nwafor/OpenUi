@@ -11,7 +11,7 @@ export const navbarComponents: ComponentDoc[] = [
       version: "1.0.0",
       category: "navbars",
       tags: ["navbar", "glass", "sticky", "glassmorphism", "navigation"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 3241, likes: 278,
     },
     code: `"use client";
@@ -93,7 +93,7 @@ export default function Demo() { return <GlassNavbar />; }`,
       version: "1.0.0",
       category: "navbars",
       tags: ["navbar", "sidebar", "vertical", "dashboard", "navigation"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 2654, likes: 213,
     },
     code: `"use client";
@@ -183,7 +183,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "navbars",
       tags: ["navbar", "app", "topbar", "search", "notifications", "avatar"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1987, likes: 162,
     },
     code: `import { Bell, Search, Settings, ChevronDown } from "lucide-react";
@@ -246,7 +246,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "navbars",
       tags: ["navbar", "breadcrumb", "navigation", "hierarchy", "path"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 876, likes: 67,
     },
     code: `import { ChevronRight, Home } from "lucide-react";
@@ -320,7 +320,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "navbars",
       tags: ["navbar", "tabs", "navigation", "indicator", "animated"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1654, likes: 134,
     },
     code: `"use client";

@@ -11,7 +11,7 @@ export const dashboardComponents: ComponentDoc[] = [
       version: "1.0.0",
       category: "dashboards",
       tags: ["dashboard", "analytics", "stats", "chart", "admin"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 4231, likes: 387,
     },
     code: `import { TrendingUp, TrendingDown, Users, DollarSign, ShoppingBag, Activity, ArrowUpRight } from "lucide-react";
@@ -144,7 +144,7 @@ export default function Demo() { return <AnalyticsDashboard />; }`,
       version: "1.0.0",
       category: "dashboards",
       tags: ["dashboard", "admin", "panel", "layout", "sidebar"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 3120, likes: 271,
     },
     code: `"use client";
@@ -260,7 +260,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "dashboards",
       tags: ["dashboard", "kanban", "board", "tasks", "project-management"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 2341, likes: 201,
     },
     code: `"use client";
@@ -387,7 +387,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "dashboards",
       tags: ["dashboard", "table", "data", "sort", "pagination", "filter"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 2876, likes: 241,
     },
     code: `"use client";
@@ -525,7 +525,7 @@ export default function Demo() { return <div className="bg-gray-950 p-6 rounded-
       version: "1.0.0",
       category: "dashboards",
       tags: ["dashboard", "profile", "user", "github", "activity", "stats"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1876, likes: 163,
     },
     code: `import { Github, Globe, MapPin, Calendar, Star, GitFork, Package } from "lucide-react";

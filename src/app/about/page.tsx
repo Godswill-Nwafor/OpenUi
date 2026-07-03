@@ -28,7 +28,7 @@ const team = contributors.map((c) => ({
 const values = [
   { icon: <Heart size={20} />, title: "Community First", desc: "Every decision is made with the developer community in mind. We build what developers actually need." },
   { icon: <Star size={20} />, title: "Quality Over Quantity", desc: "We'd rather have 10 exceptional components than 100 mediocre ones. Every component is reviewed." },
-  { icon: <GitPullRequest size={20} />, title: "Open by Default", desc: "Everything — the codebase, discussions, roadmap, and governance — happens in the open on GitHub." },
+  { icon: <GitPullRequest size={20} />, title: "Open by Default", desc: "Everything, the codebase, discussions, roadmap, and governance, happens in the open on GitHub." },
   { icon: <Users size={20} />, title: "Inclusive & Accessible", desc: "Components are built with accessibility in mind and the library is welcoming to all contributors." },
 ];
 
@@ -45,8 +45,8 @@ export default function AboutPage() {
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">About OpenUI Hub</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            OpenUI Hub is an open-source platform where developers collaborate to build, share, and discover
-            beautiful React UI components — completely free, forever.
+            OpenUI Hub is an open source platform where developers collaborate to build, share, and discover
+            beautiful React UI components, completely free, forever.
           </p>
         </div>
       </div>
@@ -58,8 +58,8 @@ export default function AboutPage() {
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 leading-relaxed">
             <p>
               Building a great product UI shouldn't mean starting from scratch every time.
-              OpenUI Hub exists to give developers a shared foundation of beautiful, production-ready
-              components — built in the open, owned by the community.
+              OpenUI Hub exists to give developers a shared foundation of beautiful, production ready
+              components built in the open and owned by the community.
             </p>
             <p>
               We believe that the best components come from developers solving real problems.
@@ -67,8 +67,8 @@ export default function AboutPage() {
               By sharing it here, they've saved thousands of other developers hours of work.
             </p>
             <p>
-              Our goal is to become the definitive open-source React component library —
-              one where quality, accessibility, and developer experience are never compromised.
+              Our goal is to become the definitive open source React component library
+              where quality, accessibility, and developer experience are never compromised.
             </p>
           </div>
         </section>

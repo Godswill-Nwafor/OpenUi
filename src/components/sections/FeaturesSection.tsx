@@ -13,7 +13,7 @@ const features = [
   {
     icon: Copy,
     title: "One-Click Copy",
-    description: "Copy production-ready component code with a single click. No setup, no boilerplate.",
+    description: "Copy production ready component code with a single click. No setup, no boilerplate.",
     gradient: "from-purple-500 to-violet-600",
   },
   {
@@ -49,7 +49,7 @@ const features = [
   {
     icon: Layers,
     title: "26 Categories",
-    description: "From buttons to full dashboards — every UI pattern you need, organized and searchable.",
+    description: "From buttons to full dashboards, every UI pattern you need, organized and searchable.",
     gradient: "from-pink-500 to-fuchsia-600",
   },
 ];

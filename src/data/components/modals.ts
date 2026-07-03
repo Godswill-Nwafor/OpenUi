@@ -11,7 +11,7 @@ export const modalComponents: ComponentDoc[] = [
       version: "1.0.0",
       category: "modals",
       tags: ["modal", "dialog", "overlay", "popup", "accessible"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 2876, likes: 241,
     },
     code: `"use client";
@@ -116,7 +116,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "modals",
       tags: ["modal", "lightbox", "image", "gallery", "preview"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1432, likes: 118,
     },
     code: `"use client";
@@ -227,7 +227,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "modals",
       tags: ["modal", "command", "palette", "search", "keyboard", "cmdk"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 3120, likes: 287,
     },
     code: `"use client";
@@ -363,7 +363,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "modals",
       tags: ["modal", "drawer", "panel", "sidebar", "slide"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 1765, likes: 143,
     },
     code: `"use client";
@@ -461,7 +461,7 @@ export default function Demo() {
       version: "1.0.0",
       category: "modals",
       tags: ["modal", "fullscreen", "onboarding", "wizard", "takeover"],
-      createdAt: "2024-11-01", updatedAt: "2024-11-01",
+      createdAt: "2026-06-25", updatedAt: "2026-07-03",
       status: "approved", downloads: 987, likes: 79,
     },
     code: `"use client";

@@ -127,7 +127,7 @@ export function ProgressAlert({ message, duration = 5000, onDismiss }: { message
 
 export function InlineAlertPreview() {
   return (
-    <div className="flex flex-col gap-3 p-4 bg-gray-950">
+    <div className="flex flex-col gap-3 p-4">
       <InlineAlert variant="info" message="Your plan resets on January 1st." dismissible />
       <InlineAlert variant="success" title="Payment successful!" message="Your subscription has been activated." />
       <InlineAlert variant="warning" message="You have 3 days left on your trial." dismissible />
@@ -142,7 +142,7 @@ export function ToastAlertPreview() {
     { id: 2, message: "Update available.", type: "info" },
   ]);
   return (
-    <div className="flex flex-col gap-3 p-4 bg-gray-950">
+    <div className="flex flex-col gap-3 p-4">
       <div className="flex gap-2 mb-2">
         {(["success", "error", "info"] as ToastType[]).map(t => (
           <button key={t} onClick={() => setToasts(prev => [...prev, { id: Date.now(), message: t === "success" ? "Saved!" : t === "error" ? "Error occurred" : "FYI", type: t }])}
@@ -160,7 +160,7 @@ export function ToastAlertPreview() {
 
 export function BannerAlertPreview() {
   return (
-    <div className="flex flex-col gap-2 bg-gray-950 p-4">
+    <div className="flex flex-col gap-2 p-4">
       <SiteBanner message="🎉 OpenUI Hub v1.0 is now live!" cta={{ label: "Read the announcement", href: "#" }} variant="brand" />
       <div className="mt-2">
         <SiteBanner message="⚠️ Scheduled maintenance on Sunday 2am UTC" variant="warning" />
@@ -172,7 +172,7 @@ export function BannerAlertPreview() {
 export function ConfirmAlertPreview() {
   const [open, setOpen] = useState(false);
   return (
-    <div className="flex flex-col items-center justify-center gap-4 p-6 bg-gray-950">
+    <div className="flex flex-col items-center justify-center gap-4 p-6">
       <button onClick={() => setOpen(true)} className="px-4 py-2 rounded-xl bg-red-600 text-white text-sm font-medium">Delete Account</button>
       <p className="text-xs text-slate-500">Click to open confirm dialog</p>
       <ConfirmAlert
@@ -190,7 +190,7 @@ export function ConfirmAlertPreview() {
 export function ProgressAlertPreview() {
   const [show, setShow] = useState(true);
   return (
-    <div className="flex flex-col items-center gap-4 p-6 bg-gray-950">
+    <div className="flex flex-col items-center gap-4 p-6">
       {!show && <button onClick={() => setShow(true)} className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm">Show Again</button>}
       {show && <ProgressAlert message="File uploaded successfully!" duration={8000} onDismiss={() => setShow(false)} />}
     </div>
