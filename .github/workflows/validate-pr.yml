@@ -1,0 +1,153 @@
+name: Validate Pull Request
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  pull-requests: read
+  contents: read
+
+# Cancel in-progress runs for the same PR
+concurrency:
+  group: validate-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 1 — Standard CI: Install, Lint, Type-check, Build
+  # ──────────────────────────────────────────────────────────────────────────
+  ci:
+    name: CI (lint / type-check / build)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: TypeScript type check
+        run: npm run type-check
+
+      - name: Build
+        run: npm run build
+        env:
+          # Allow build to succeed without real env vars in CI
+          SKIP_ENV_VALIDATION: "1"
+          NEXTAUTH_SECRET: "ci-placeholder-secret"
+          NEXTAUTH_URL: "http://localhost:3000"
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 2 — Component Submission Validation
+  # Validates component folders placed under submissions/
+  # ──────────────────────────────────────────────────────────────────────────
+  validate-submissions:
+    name: Validate component submissions
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Detect changed component submissions
+        id: detect
+        run: |
+          # List files changed in this PR that live under submissions/
+          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- "submissions/" 2>/dev/null | grep -v '\.gitkeep' || true)
+
+          if [ -z "$CHANGED" ]; then
+            echo "has_submissions=false" >> "$GITHUB_OUTPUT"
+            echo "No component submissions changed in this PR."
+          else
+            # Extract unique top-level folder names under submissions/
+            COMPONENTS=$(echo "$CHANGED" | sed 's|submissions/||' | cut -d'/' -f1 | sort -u | tr '\n' ' ')
+            echo "has_submissions=true" >> "$GITHUB_OUTPUT"
+            echo "components=$COMPONENTS" >> "$GITHUB_OUTPUT"
+            echo "Detected changed submissions: $COMPONENTS"
+          fi
+
+      - name: Validate component folder structure and metadata
+        if: steps.detect.outputs.has_submissions == 'true'
+        run: |
+          FAILED=0
+          for component in ${{ steps.detect.outputs.components }}; do
+            echo ""
+            echo "══════════════════════════════════════════════════"
+            echo "  Validating: submissions/$component"
+            echo "══════════════════════════════════════════════════"
+            node scripts/validate-component.js "submissions/$component" || FAILED=1
+          done
+
+          echo ""
+          if [ $FAILED -ne 0 ]; then
+            echo "❌  One or more submissions failed validation."
+            echo "    Fix the errors listed above and push again."
+            echo "    All checks must pass before this PR can be merged."
+            exit 1
+          fi
+
+          echo "✅  All component submissions passed validation."
+
+      - name: No submissions — skip
+        if: steps.detect.outputs.has_submissions == 'false'
+        run: |
+          echo "No changes under submissions/ detected — skipping component validation."
+          echo "To submit a component, create a folder under submissions/YourComponentName/"
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 3 — Validate Component Data Files (src/data/components/)
+  # Checks that internal ComponentDoc metadata is complete and correct
+  # ──────────────────────────────────────────────────────────────────────────
+  validate-data:
+    name: Validate component data files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Detect changed component data files
+        id: detect-data
+        run: |
+          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- "src/data/components/" 2>/dev/null || true)
+          if [ -z "$CHANGED" ]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            echo "Changed data files:"
+            echo "$CHANGED"
+          fi
+
+      - name: Validate component data metadata
+        if: steps.detect-data.outputs.has_changes == 'true'
+        run: node scripts/validate-metadata.js
+
+      - name: No data changes — skip
+        if: steps.detect-data.outputs.has_changes == 'false'
+        run: echo "No src/data/components/ changes detected — skipping data validation."
