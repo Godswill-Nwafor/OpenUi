@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Heart, Download, Eye, Copy, Check } from "lucide-react";
+import { Heart, Download, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "./Badge";
 import { cn, formatNumber } from "@/lib/utils";
@@ -16,6 +16,7 @@ interface ComponentCardProps {
 
 export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
   const [copied, setCopied] = useState(false);
+  const router = useRouter();
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -33,7 +34,13 @@ export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
     >
-      <Link href={`/components/${component.id}`} className="block group">
+      <div
+        className="block group cursor-pointer"
+        onClick={() => router.push(`/components/${component.id}`)}
+        role="link"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && router.push(`/components/${component.id}`)}
+      >
         <div className={cn(
           "rounded-2xl border border-border bg-card overflow-hidden",
           "hover:border-brand/40 hover:shadow-xl hover:shadow-brand/5",
@@ -77,6 +84,7 @@ export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
                 </span>
               </div>
               <button
+                type="button"
                 onClick={handleCopy}
                 className={cn(
                   "flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all duration-200",
@@ -91,7 +99,7 @@ export function ComponentCard({ component, index = 0 }: ComponentCardProps) {
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </motion.div>
   );
 }
