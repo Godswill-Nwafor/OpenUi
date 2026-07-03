@@ -102,12 +102,16 @@ export function ProgressAlert({ message, duration = 5000, onDismiss }: { message
     const step = (interval / duration) * 100;
     const timer = setInterval(() => {
       setProgress(p => {
-        if (p <= 0) { clearInterval(timer); onDismiss?.(); return 0; }
-        return p - step;
+        const next = p - step;
+        if (next <= 0) { clearInterval(timer); return 0; }
+        return next;
       });
     }, interval);
     return () => clearInterval(timer);
-  }, [duration, onDismiss]);
+  }, [duration]);
+  useEffect(() => {
+    if (progress <= 0) onDismiss?.();
+  }, [progress, onDismiss]);
   return (
     <div className="w-80 rounded-xl border border-white/10 bg-gray-900 overflow-hidden shadow-xl">
       <div className="flex items-center gap-3 px-4 py-3.5">
