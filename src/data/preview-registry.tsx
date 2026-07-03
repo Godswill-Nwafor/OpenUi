@@ -47,8 +47,8 @@ import {
 
 type Config = { render: () => ReactNode; scale: number; bg: string };
 
-const light = "bg-secondary";
-const dark = "bg-gray-50";
+const light = "bg-background";
+const dark = "bg-background";
 
 const configs: Record<string, Config> = {
   // Buttons — light bg

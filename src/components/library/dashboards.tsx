@@ -14,32 +14,32 @@ const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 
 export function AnalyticsDashboard() {
   return (
-    <div className="min-h-screen bg-gray-50 p-5">
+    <div className="min-h-screen bg-background p-5">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Analytics Dashboard</h1>
-            <p className="text-gray-500 text-sm">Last 30 days</p>
+            <h1 className="text-xl font-bold text-foreground">Analytics Dashboard</h1>
+            <p className="text-muted-foreground text-sm">Last 30 days</p>
           </div>
-          <select className="px-3 py-2 rounded-lg border border-gray-200 bg-white text-gray-700 text-sm">
+          <select className="px-3 py-2 rounded-lg border border-border bg-card text-foreground text-sm">
             <option>Last 30 days</option><option>Last 7 days</option><option>Last 90 days</option>
           </select>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {stats.map(s => (
-            <div key={s.label} className="rounded-xl border border-gray-200 bg-white p-4">
+            <div key={s.label} className="rounded-xl border border-border bg-card p-4">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-gray-500 text-xs font-medium">{s.label}</p>
+                <p className="text-muted-foreground text-xs font-medium">{s.label}</p>
                 <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${s.up ? "bg-emerald-500/15 text-emerald-400" : "bg-red-500/15 text-red-400"}`}>{s.icon}</div>
               </div>
-              <p className="text-xl font-bold text-gray-900 mb-1">{s.value}</p>
+              <p className="text-xl font-bold text-foreground mb-1">{s.value}</p>
               <p className={`text-xs font-medium ${s.up ? "text-emerald-400" : "text-red-400"}`}>{s.change} vs last period</p>
             </div>
           ))}
         </div>
         <div className="grid lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2 rounded-xl border border-gray-200 bg-white p-5">
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">Revenue Overview</h3>
+          <div className="lg:col-span-2 rounded-xl border border-border bg-card p-5">
+            <h3 className="text-sm font-semibold text-foreground mb-4">Revenue Overview</h3>
             <div className="flex items-end gap-2 h-32">
               {barHeights.map((h, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center gap-1">
@@ -48,11 +48,11 @@ export function AnalyticsDashboard() {
               ))}
             </div>
             <div className="flex justify-between mt-2">
-              {months.map(m => <span key={m} className="text-[10px] text-gray-400">{m}</span>)}
+              {months.map(m => <span key={m} className="text-[10px] text-muted-foreground">{m}</span>)}
             </div>
           </div>
-          <div className="rounded-xl border border-gray-200 bg-white p-5">
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">Recent Activity</h3>
+          <div className="rounded-xl border border-border bg-card p-5">
+            <h3 className="text-sm font-semibold text-foreground mb-4">Recent Activity</h3>
             <div className="space-y-3">
               {[
                 { user: "Sarah K.", action: "Upgraded to Pro", time: "2m ago", color: "bg-emerald-500" },
@@ -64,8 +64,8 @@ export function AnalyticsDashboard() {
                 <div key={i} className="flex items-start gap-3">
                   <div className={`w-2 h-2 rounded-full ${item.color} mt-1.5 shrink-0`} />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-900 truncate"><span className="font-medium">{item.user}</span> {item.action}</p>
-                    <p className="text-xs text-gray-400">{item.time}</p>
+                    <p className="text-sm text-foreground truncate"><span className="font-medium">{item.user}</span> {item.action}</p>
+                    <p className="text-xs text-muted-foreground">{item.time}</p>
                   </div>
                 </div>
               ))}
@@ -90,18 +90,18 @@ export function AdminPanel({ children }: { children?: React.ReactNode }) {
   const [active, setActive] = useState("Dashboard");
   const [collapsed, setCollapsed] = useState(false);
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
-      <aside className={`flex flex-col bg-white border-r border-gray-200 transition-all duration-300 shrink-0 ${collapsed ? "w-14" : "w-56"}`}>
-        <div className="flex items-center justify-between h-14 px-4 border-b border-gray-200">
-          {!collapsed && <span className="font-bold text-gray-900 text-sm">OpenUI Hub</span>}
-          <button onClick={() => setCollapsed(v => !v)} className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 ml-auto">
+    <div className="flex h-screen bg-background overflow-hidden">
+      <aside className={`flex flex-col bg-card border-r border-border transition-all duration-300 shrink-0 ${collapsed ? "w-14" : "w-56"}`}>
+        <div className="flex items-center justify-between h-14 px-4 border-b border-border">
+          {!collapsed && <span className="font-bold text-foreground text-sm">OpenUI Hub</span>}
+          <button onClick={() => setCollapsed(v => !v)} className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted ml-auto">
             <ChevronLeft size={14} className={`transition-transform duration-300 ${collapsed ? "rotate-180" : ""}`} />
           </button>
         </div>
         <nav className="flex-1 p-2 space-y-0.5">
           {sideItems.map(item => (
             <button key={item.label} onClick={() => setActive(item.label)}
-              className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-left text-sm transition-colors ${active === item.label ? "bg-indigo-600/20 text-indigo-400" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"} ${collapsed ? "justify-center" : ""}`}>
+              className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-left text-sm transition-colors ${active === item.label ? "bg-indigo-600/20 text-indigo-400" : "text-muted-foreground hover:text-foreground hover:bg-muted"} ${collapsed ? "justify-center" : ""}`}>
               <span className="shrink-0">{item.icon}</span>
               {!collapsed && (
                 <><span className="flex-1">{item.label}</span>{item.badge && <span className="w-5 h-5 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center">{item.badge}</span>}</>
@@ -109,22 +109,22 @@ export function AdminPanel({ children }: { children?: React.ReactNode }) {
             </button>
           ))}
         </nav>
-        <div className="p-2 border-t border-gray-200">
-          <button className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-gray-500 hover:text-red-400 hover:bg-red-500/10 text-sm transition-colors ${collapsed ? "justify-center" : ""}`}>
+        <div className="p-2 border-t border-border">
+          <button className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-muted-foreground hover:text-red-400 hover:bg-red-500/10 text-sm transition-colors ${collapsed ? "justify-center" : ""}`}>
             <LogOut size={16} className="shrink-0" />{!collapsed && <span>Sign out</span>}
           </button>
         </div>
       </aside>
       <main className="flex-1 flex flex-col overflow-hidden">
-        <header className="flex items-center justify-between h-14 px-5 border-b border-gray-200 bg-white shrink-0">
+        <header className="flex items-center justify-between h-14 px-5 border-b border-border bg-card shrink-0">
           <div className="flex items-center gap-2 flex-1 max-w-xs">
-            <div className="flex items-center gap-2 h-8 px-3 rounded-lg border border-gray-200 bg-gray-100 flex-1">
-              <Search size={13} className="text-gray-400" />
-              <input className="flex-1 bg-transparent text-sm text-gray-700 placeholder:text-gray-400 outline-none" placeholder="Search..." />
+            <div className="flex items-center gap-2 h-8 px-3 rounded-lg border border-border bg-muted flex-1">
+              <Search size={13} className="text-muted-foreground" />
+              <input className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none" placeholder="Search..." />
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button className="relative w-8 h-8 flex items-center justify-center rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100">
+            <button className="relative w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted">
               <Bell size={15} /><span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-indigo-500" />
             </button>
             <img src="https://avatars.githubusercontent.com/u/1?v=4" className="w-7 h-7 rounded-full" alt="user" />
@@ -133,12 +133,12 @@ export function AdminPanel({ children }: { children?: React.ReactNode }) {
         <div className="flex-1 overflow-auto p-5">
           {children ?? (
             <div>
-              <h1 className="text-lg font-bold text-gray-900 mb-4">{active}</h1>
+              <h1 className="text-lg font-bold text-foreground mb-4">{active}</h1>
               <div className="grid grid-cols-3 gap-4">
                 {[["Users", "1,284", "emerald"], ["Revenue", "$9,420", "indigo"], ["Uptime", "99.9%", "purple"]].map(([l, v, c]) => (
-                  <div key={l} className="rounded-xl border border-gray-200 bg-white p-4">
-                    <p className="text-gray-500 text-xs mb-1">{l}</p>
-                    <p className="text-xl font-bold text-gray-900">{v}</p>
+                  <div key={l} className="rounded-xl border border-border bg-card p-4">
+                    <p className="text-muted-foreground text-xs mb-1">{l}</p>
+                    <p className="text-xl font-bold text-foreground">{v}</p>
                   </div>
                 ))}
               </div>
@@ -152,7 +152,7 @@ export function AdminPanel({ children }: { children?: React.ReactNode }) {
 
 // KanbanBoard
 const columns = [
-  { id: "todo", label: "To Do", color: "text-gray-500", count: 3, tasks: [
+  { id: "todo", label: "To Do", color: "text-muted-foreground", count: 3, tasks: [
     { id: 1, title: "Design landing page", priority: "High", tag: "Design" },
     { id: 2, title: "Set up CI/CD pipeline", priority: "Medium", tag: "DevOps" },
     { id: 3, title: "Write API docs", priority: "Low", tag: "Docs" },
@@ -170,13 +170,13 @@ const columns = [
     { id: 9, title: "Requirements doc", priority: "Medium", tag: "Docs" },
   ]},
 ];
-const priorityColor: Record<string, string> = { High: "text-red-400 bg-red-500/10", Medium: "text-amber-400 bg-amber-500/10", Low: "text-gray-500 bg-gray-50" };
+const priorityColor: Record<string, string> = { High: "text-red-400 bg-red-500/10", Medium: "text-amber-400 bg-amber-500/10", Low: "text-muted-foreground bg-background" };
 
 export function KanbanBoard() {
   return (
-    <div className="min-h-screen bg-gray-50 p-5">
+    <div className="min-h-screen bg-background p-5">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold text-gray-900">Project Board</h1>
+        <h1 className="text-xl font-bold text-foreground">Project Board</h1>
         <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors">
           <Plus size={15} /> Add task
         </button>
@@ -187,16 +187,16 @@ export function KanbanBoard() {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <span className={`text-xs font-semibold uppercase tracking-wider ${col.color}`}>{col.label}</span>
-                <span className="text-xs text-gray-400 bg-gray-50 rounded-full px-1.5 py-0.5">{col.count}</span>
+                <span className="text-xs text-muted-foreground bg-background rounded-full px-1.5 py-0.5">{col.count}</span>
               </div>
-              <button className="text-gray-400 hover:text-gray-900 transition-colors"><Plus size={14} /></button>
+              <button className="text-muted-foreground hover:text-foreground transition-colors"><Plus size={14} /></button>
             </div>
             <div className="space-y-2.5 flex-1">
               {col.tasks.map(task => (
-                <div key={task.id} className="rounded-xl border border-gray-200 bg-white p-3.5 cursor-pointer hover:border-gray-300 transition-colors group">
+                <div key={task.id} className="rounded-xl border border-border bg-card p-3.5 cursor-pointer hover:border-border transition-colors group">
                   <div className="flex items-start justify-between gap-2 mb-2.5">
-                    <p className="text-sm text-gray-900 font-medium leading-snug">{task.title}</p>
-                    <button className="text-gray-400 hover:text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity"><MoreHorizontal size={14} /></button>
+                    <p className="text-sm text-foreground font-medium leading-snug">{task.title}</p>
+                    <button className="text-muted-foreground hover:text-foreground opacity-0 group-hover:opacity-100 transition-opacity"><MoreHorizontal size={14} /></button>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400">{task.tag}</span>
@@ -204,7 +204,7 @@ export function KanbanBoard() {
                   </div>
                 </div>
               ))}
-              <button className="w-full py-2.5 rounded-xl border border-dashed border-gray-200 text-gray-400 hover:text-gray-500 hover:border-gray-300 text-xs flex items-center justify-center gap-1.5 transition-colors">
+              <button className="w-full py-2.5 rounded-xl border border-dashed border-border text-muted-foreground hover:text-muted-foreground hover:border-border text-xs flex items-center justify-center gap-1.5 transition-colors">
                 <Plus size={13} /> Add card
               </button>
             </div>
@@ -254,21 +254,21 @@ export function DataTable() {
     : <ChevronsUpDown size={12} className="opacity-30" />;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-5">
+    <div className="min-h-screen bg-background p-5">
       <div className="flex items-center justify-between mb-5">
-        <h1 className="text-xl font-bold text-gray-900">Users</h1>
-        <div className="flex items-center gap-2 h-9 px-3 rounded-lg border border-gray-200 bg-white">
-          <Search size={13} className="text-gray-400" />
-          <input value={query} onChange={e => { setQuery(e.target.value); setPage(1); }} placeholder="Search users..." className="bg-transparent text-sm text-gray-700 placeholder:text-gray-400 outline-none w-40" />
+        <h1 className="text-xl font-bold text-foreground">Users</h1>
+        <div className="flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card">
+          <Search size={13} className="text-muted-foreground" />
+          <input value={query} onChange={e => { setQuery(e.target.value); setPage(1); }} placeholder="Search users..." className="bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none w-40" />
         </div>
       </div>
-      <div className="rounded-xl border border-gray-200 overflow-hidden">
+      <div className="rounded-xl border border-border overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-white/80">
+          <thead className="bg-card/80">
             <tr>
               {[["name", "Name"], ["email", "Email"], ["role", "Role"], ["status", "Status"], ["joined", "Joined"]].map(([k, l]) => (
                 <th key={k} className="px-4 py-3 text-left">
-                  <button onClick={() => toggleSort(k)} className="flex items-center gap-1.5 text-gray-500 font-medium hover:text-gray-900 transition-colors">
+                  <button onClick={() => toggleSort(k)} className="flex items-center gap-1.5 text-muted-foreground font-medium hover:text-foreground transition-colors">
                     {l} <SortIcon col={k} />
                   </button>
                 </th>
@@ -277,26 +277,26 @@ export function DataTable() {
           </thead>
           <tbody>
             {rows.map((row, i) => (
-              <tr key={row.id} className={`border-t border-gray-100 ${i % 2 ? "bg-gray-50" : "bg-gray-50"} hover:bg-gray-50 transition-colors`}>
-                <td className="px-4 py-3 text-gray-900 font-medium">{row.name}</td>
-                <td className="px-4 py-3 text-gray-500">{row.email}</td>
+              <tr key={row.id} className={`border-t border-border ${i % 2 ? "bg-background" : "bg-background"} hover:bg-muted/50 transition-colors`}>
+                <td className="px-4 py-3 text-foreground font-medium">{row.name}</td>
+                <td className="px-4 py-3 text-muted-foreground">{row.email}</td>
                 <td className="px-4 py-3"><span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs">{row.role}</span></td>
                 <td className="px-4 py-3">
-                  <span className={`flex items-center gap-1.5 text-xs font-medium ${row.status === "Active" ? "text-emerald-400" : "text-gray-400"}`}>
+                  <span className={`flex items-center gap-1.5 text-xs font-medium ${row.status === "Active" ? "text-emerald-400" : "text-muted-foreground"}`}>
                     <span className={`w-1.5 h-1.5 rounded-full ${row.status === "Active" ? "bg-emerald-500" : "bg-slate-600"}`} />{row.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-gray-500">{row.joined}</td>
+                <td className="px-4 py-3 text-muted-foreground">{row.joined}</td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
-          <p className="text-xs text-gray-400">{sorted.length} user{sorted.length !== 1 ? "s" : ""}</p>
+        <div className="flex items-center justify-between px-4 py-3 border-t border-border bg-background">
+          <p className="text-xs text-muted-foreground">{sorted.length} user{sorted.length !== 1 ? "s" : ""}</p>
           <div className="flex items-center gap-1">
             {Array.from({ length: pages }, (_, i) => (
               <button key={i} onClick={() => setPage(i + 1)}
-                className={`w-7 h-7 rounded-lg text-xs font-medium transition-colors ${page === i + 1 ? "bg-indigo-600 text-white" : "text-gray-500 hover:bg-gray-100"}`}>{i + 1}</button>
+                className={`w-7 h-7 rounded-lg text-xs font-medium transition-colors ${page === i + 1 ? "bg-indigo-600 text-white" : "text-muted-foreground hover:bg-muted"}`}>{i + 1}</button>
             ))}
           </div>
         </div>
@@ -314,7 +314,7 @@ const pinned = [
   { name: "design-system", desc: "Company-wide design tokens and utilities", stars: 89, forks: 15, lang: "CSS", color: "bg-pink-500" },
 ];
 function cellColor(n: number) {
-  if (n === 0) return "bg-gray-100";
+  if (n === 0) return "bg-muted";
   if (n < 3) return "bg-emerald-900";
   if (n < 6) return "bg-emerald-700";
   if (n < 9) return "bg-emerald-500";
@@ -324,34 +324,34 @@ function cellColor(n: number) {
 export function UserProfileDashboard() {
   const [tab, setTab] = useState("overview");
   return (
-    <div className="min-h-screen bg-gray-50 p-5">
+    <div className="min-h-screen bg-background p-5">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-start gap-5 mb-6">
-          <img src="https://avatars.githubusercontent.com/u/583231?v=4" className="w-16 h-16 rounded-full border-2 border-gray-200" alt="profile" />
+          <img src="https://avatars.githubusercontent.com/u/583231?v=4" className="w-16 h-16 rounded-full border-2 border-border" alt="profile" />
           <div className="flex-1 min-w-0">
-            <h1 className="text-xl font-bold text-gray-900">Alex Johnson</h1>
-            <p className="text-gray-500 text-sm">@alexj · Full Stack Developer</p>
-            <p className="text-gray-500 text-sm mt-1">Building open source tools for the web. Loves TypeScript & Tailwind.</p>
-            <div className="flex items-center gap-4 mt-2 text-xs text-gray-400">
-              <span><span className="text-gray-900 font-semibold">248</span> following</span>
-              <span><span className="text-gray-900 font-semibold">1.2k</span> followers</span>
+            <h1 className="text-xl font-bold text-foreground">Alex Johnson</h1>
+            <p className="text-muted-foreground text-sm">@alexj · Full Stack Developer</p>
+            <p className="text-muted-foreground text-sm mt-1">Building open source tools for the web. Loves TypeScript & Tailwind.</p>
+            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+              <span><span className="text-foreground font-semibold">248</span> following</span>
+              <span><span className="text-foreground font-semibold">1.2k</span> followers</span>
             </div>
           </div>
-          <button className="px-4 py-2 rounded-xl border border-gray-200 text-gray-700 text-sm hover:bg-gray-100 transition-colors">Edit profile</button>
+          <button className="px-4 py-2 rounded-xl border border-border text-foreground text-sm hover:bg-muted transition-colors">Edit profile</button>
         </div>
-        <div className="border-b border-gray-200 mb-6">
+        <div className="border-b border-border mb-6">
           <div className="flex gap-0 -mb-px">
             {["overview", "repositories", "activity"].map(t => (
               <button key={t} onClick={() => setTab(t)}
-                className={`px-4 py-2.5 text-sm font-medium capitalize transition-colors border-b-2 ${tab === t ? "border-indigo-500 text-gray-900" : "border-transparent text-gray-400 hover:text-gray-700"}`}>{t}</button>
+                className={`px-4 py-2.5 text-sm font-medium capitalize transition-colors border-b-2 ${tab === t ? "border-indigo-500 text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"}`}>{t}</button>
             ))}
           </div>
         </div>
         <div>
-          <div className="rounded-xl border border-gray-200 bg-white p-5 mb-4">
+          <div className="rounded-xl border border-border bg-card p-5 mb-4">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-gray-900">Contribution activity</h3>
-              <p className="text-xs text-gray-400">1,247 contributions in the last year</p>
+              <h3 className="text-sm font-semibold text-foreground">Contribution activity</h3>
+              <p className="text-xs text-muted-foreground">1,247 contributions in the last year</p>
             </div>
             <div className="flex gap-0.5 overflow-x-auto pb-1">
               {weeks.map((week, wi) => (
@@ -365,16 +365,16 @@ export function UserProfileDashboard() {
           </div>
           <div className="grid md:grid-cols-2 gap-4">
             {pinned.map(repo => (
-              <div key={repo.name} className="rounded-xl border border-gray-200 bg-white p-4 hover:border-gray-300 transition-colors">
+              <div key={repo.name} className="rounded-xl border border-border bg-card p-4 hover:border-border transition-colors">
                 <div className="flex items-start justify-between mb-1.5">
                   <div className="flex items-center gap-2">
                     <Code size={15} className="text-indigo-400" />
                     <span className="text-sm font-semibold text-indigo-400">{repo.name}</span>
                   </div>
-                  <span className="text-xs px-2 py-0.5 rounded-full border border-gray-200 text-gray-400">Public</span>
+                  <span className="text-xs px-2 py-0.5 rounded-full border border-border text-muted-foreground">Public</span>
                 </div>
-                <p className="text-xs text-gray-500 mb-3">{repo.desc}</p>
-                <div className="flex items-center gap-4 text-xs text-gray-400">
+                <p className="text-xs text-muted-foreground mb-3">{repo.desc}</p>
+                <div className="flex items-center gap-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1"><span className={`w-2.5 h-2.5 rounded-full ${repo.color}`} />{repo.lang}</span>
                   <span className="flex items-center gap-1"><Star size={11} />{repo.stars}</span>
                   <span className="flex items-center gap-1"><GitFork size={11} />{repo.forks}</span>
