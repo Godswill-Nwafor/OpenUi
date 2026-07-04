@@ -244,7 +244,7 @@ chore: upgrade framer-motion to 11.x
 1. **Fork** the repository on GitHub
 2. **Clone** your fork:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/openui-hub.git
+   git clone https://github.com/YOUR_USERNAME/Openui.git
    cd openui-hub
    ```
 3. **Install** dependencies:
@@ -414,7 +414,7 @@ export function MyButton({
 
 ```bash
 # Clone and install
-git clone https://github.com/openui-hub/openui-hub.git
+git clone https://github.com/Mtu-Cse406-OpenSource-team/Openui.git
 cd openui-hub
 npm install
 
@@ -448,4 +448,4 @@ Your name and GitHub profile are credited on the component's detail page for as 
 
 ---
 
-Questions? Open an issue or start a [Discussion](https://github.com/openui-hub/openui-hub/discussions).
+Questions? Open an issue or start a [Discussion](https://github.com/Mtu-Cse406-OpenSource-team/Openui/discussions).

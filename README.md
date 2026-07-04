@@ -95,7 +95,7 @@ The folder name, `.tsx` file name, and exported component function name must all
 1. **Fork** the repository on GitHub
 2. **Clone** your fork and install dependencies:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/openui-hub.git
+   git clone https://github.com/YOUR_USERNAME/Openui.git
    cd openui-hub && npm install
    ```
 3. **Create** a feature branch:
@@ -205,7 +205,7 @@ openui/
 
 ```bash
 # Clone the repository
-git clone https://github.com/openui-hub/openui-hub.git
+git clone https://github.com/Mtu-Cse406-OpenSource-team/Openui.git
 cd openui-hub
 
 # Install dependencies
@@ -247,7 +247,7 @@ Every approved component permanently displays:
 
 ## License
 
-MIT © [OpenUI Hub Contributors](https://github.com/openui-hub/openui-hub/graphs/contributors)
+MIT © [OpenUI Hub Contributors](https://github.com/Mtu-Cse406-OpenSource-team/Openui/graphs/contributors)
 
 See [LICENSE](LICENSE) for the full license text.
 
