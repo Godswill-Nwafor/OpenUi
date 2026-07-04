@@ -1,6 +1,7 @@
 ﻿import Link from "next/link";
-import { Github, Layers, Twitter, Heart } from "lucide-react";
-import { SITE_NAME, GITHUB_REPO, CATEGORIES } from "@/lib/constants";
+import { Github, Twitter, Heart } from "lucide-react";
+import { GITHUB_REPO, CATEGORIES } from "@/lib/constants";
+import { Logo } from "@/components/ui/Logo";
 
 const footerLinks = {
   Platform: [
@@ -36,11 +37,8 @@ export function Footer() {
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 group w-fit">
-              <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center shadow-md shadow-indigo-500/20">
-                <Layers size={16} className="text-white" />
-              </div>
-              <span className="font-bold text-[15px]">{SITE_NAME}</span>
+            <Link href="/" className="w-fit">
+              <Logo size={32} />
             </Link>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-xs">
               A production-quality open-source UI components library. Browse, preview, and copy beautiful React components — or contribute your own.
@@ -108,7 +106,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="py-5 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
           <p>
-            © {new Date().getFullYear()} {SITE_NAME}. Released under the{" "}
+            © {new Date().getFullYear()} OpenUI Hub. Released under the{" "}
             <Link href="/license" className="hover:text-foreground transition-colors underline underline-offset-2">
               MIT License
             </Link>

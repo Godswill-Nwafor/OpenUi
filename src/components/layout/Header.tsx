@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Github, Layers, Moon, Sun } from "lucide-react";
+import { Menu, X, Github, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
-import { NAV_LINKS, GITHUB_REPO, SITE_NAME } from "@/lib/constants";
+import { NAV_LINKS, GITHUB_REPO } from "@/lib/constants";
+import { Logo } from "@/components/ui/Logo";
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -50,11 +51,8 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-shadow">
-              <Layers size={16} className="text-white" />
-            </div>
-            <span className="font-bold text-[15px] tracking-tight">{SITE_NAME}</span>
+          <Link href="/" className="group">
+            <Logo size={32} />
           </Link>
 
           {/* Desktop nav */}
