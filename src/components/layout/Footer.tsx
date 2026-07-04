@@ -38,7 +38,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="w-fit">
-              <Logo size={32} />
+              <Logo size="md" />
             </Link>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-xs">
               A production-quality open-source UI components library. Browse, preview, and copy beautiful React components — or contribute your own.

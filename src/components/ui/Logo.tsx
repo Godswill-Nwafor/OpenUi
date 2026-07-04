@@ -1,62 +1,65 @@
+"use client";
+
+import { useId } from "react";
 import { cn } from "@/lib/utils";
 
-interface LogoMarkProps {
-  size?: number;
+interface LogoProps {
   className?: string;
+  size?: "sm" | "md" | "lg";
 }
 
-export function LogoMark({ size = 32, className }: LogoMarkProps) {
+export function Logo({ className, size = "md" }: LogoProps) {
+  const uid = useId().replace(/:/g, "");
+  const gradId = `logo-o-${uid}`;
+
+  const cfg = {
+    sm: { ring: 20, stroke: 3,   text: "text-[13px]" },
+    md: { ring: 26, stroke: 3.5, text: "text-[16px]" },
+    lg: { ring: 32, stroke: 4,   text: "text-[20px]" },
+  }[size];
+
+  const half = cfg.ring / 2;
+  const r = half - cfg.stroke / 2 - 0.5;
+
   return (
-    <div
-      style={{ width: size, height: size, borderRadius: size * 0.28 }}
-      className={cn(
-        "relative flex items-center justify-center shrink-0",
-        "bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600",
-        "shadow-lg shadow-indigo-500/30",
-        className
-      )}
-    >
+    <div className={cn("flex items-center gap-1 leading-none select-none", className)}>
+      {/* Gradient "O" ring */}
       <svg
-        width={size * 0.68}
-        height={size * 0.68}
-        viewBox="0 0 22 22"
+        width={cfg.ring}
+        height={cfg.ring}
+        viewBox={`0 0 ${cfg.ring} ${cfg.ring}`}
         fill="none"
         aria-hidden="true"
+        className="shrink-0"
       >
-        {/* Navbar bar */}
-        <rect x="1" y="1" width="20" height="3.5" rx="1.75" fill="white" fillOpacity="0.95" />
-        {/* Left card */}
-        <rect x="1" y="7.5" width="9" height="7.5" rx="2" fill="white" fillOpacity="0.8" />
-        {/* Right card */}
-        <rect x="12" y="7.5" width="9" height="7.5" rx="2" fill="white" fillOpacity="0.5" />
-        {/* Bottom text strip */}
-        <rect x="1" y="17.5" width="13" height="2.5" rx="1.25" fill="white" fillOpacity="0.35" />
-        {/* Bottom text strip short */}
-        <rect x="15.5" y="17.5" width="5.5" height="2.5" rx="1.25" fill="white" fillOpacity="0.2" />
+        <defs>
+          <linearGradient
+            id={gradId}
+            x1="0" y1="0"
+            x2={cfg.ring} y2={cfg.ring}
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#6366f1" />
+            <stop offset="1" stopColor="#a855f7" />
+          </linearGradient>
+        </defs>
+        <circle
+          cx={half}
+          cy={half}
+          r={r}
+          stroke={`url(#${gradId})`}
+          strokeWidth={cfg.stroke}
+        />
       </svg>
-    </div>
-  );
-}
 
-interface LogoProps {
-  size?: number;
-  className?: string;
-  showText?: boolean;
-}
-
-export function Logo({ size = 32, className, showText = true }: LogoProps) {
-  const textSize = size <= 28 ? "text-[13px]" : size <= 36 ? "text-[15px]" : "text-[17px]";
-
-  return (
-    <div className={cn("flex items-center gap-2.5", className)}>
-      <LogoMark size={size} />
-      {showText && (
-        <span className={cn("font-bold tracking-tight leading-none", textSize)}>
-          <span className="text-foreground">Open</span>
-          <span className="text-brand">UI</span>
-          <span className="text-muted-foreground font-medium"> Hub</span>
+      {/* Wordmark: "penUI Hub" — the O is the SVG above */}
+      <span className={cn("font-bold tracking-tight", cfg.text)}>
+        <span className="text-foreground">pen</span>
+        <span className="bg-linear-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
+          UI
         </span>
-      )}
+        <span className="text-muted-foreground font-medium"> Hub</span>
+      </span>
     </div>
   );
 }

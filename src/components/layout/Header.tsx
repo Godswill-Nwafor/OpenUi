@@ -52,7 +52,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="group">
-            <Logo size={32} />
+            <Logo size="md" />
           </Link>
 
           {/* Desktop nav */}
