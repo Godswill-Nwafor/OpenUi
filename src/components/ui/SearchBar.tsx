@@ -55,11 +55,11 @@ export function SearchBar({
         placeholder={placeholder}
         className={cn(
           "w-full rounded-xl border border-border bg-card",
+          sizeClasses[size],
           "pl-10 pr-10 outline-none ring-0",
           "text-foreground placeholder:text-muted-foreground",
           "focus:border-brand focus:ring-2 focus:ring-brand/20",
           "transition-all duration-200",
-          sizeClasses[size]
         )}
       />
       {val && (
