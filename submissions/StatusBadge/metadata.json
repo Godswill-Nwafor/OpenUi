@@ -1,0 +1,12 @@
+{
+  "name": "Status Badge",
+  "description": "A small pill badge that shows a colored status dot (online, offline, away, busy) with an optional pulsing animation.",
+  "author": "Godswill Nwafor",
+  "githubUsername": "Godswill-Nwafor",
+  "category": "badges",
+  "framework": "React",
+  "language": "TypeScript",
+  "styling": "Tailwind CSS",
+  "version": "1.0.0",
+  "tags": ["badge", "status", "indicator", "pill", "avatar"]
+}
