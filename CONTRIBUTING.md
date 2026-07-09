@@ -31,14 +31,18 @@ OpenUI Hub accepts components built with **any language or framework** — React
 
 ### Live preview support
 
-Two authoring styles get a real, interactive live preview in the gallery today:
+Four authoring styles get a real, interactive live preview in the gallery today:
 
 | Stack | Main file | Preview |
 |---|---|---|
 | **React** (TypeScript or JavaScript) | `ComponentName.tsx` / `.jsx` | Rendered live in the app |
 | **Plain HTML/CSS** | `ComponentName.html` (+ optional `ComponentName.css`) | Rendered live in a sandboxed iframe |
+| **Svelte** | `ComponentName.svelte` | Compiled with the real Svelte compiler, rendered live in a sandboxed iframe |
+| **Vue** (including `<script setup>`) | `ComponentName.vue` | Compiled with the real `@vue/compiler-sfc`, rendered live in a sandboxed iframe |
 
-Anything else (Vue, Angular, Svelte, vanilla JS, jQuery, etc.) is still fully accepted — it just displays as code + documentation instead of an interactive render, since the gallery doesn't bundle those frameworks' runtimes yet. That may change in future versions.
+For Svelte and Vue, the compile step isn't automatic on submission — it runs once, via `node scripts/compile-preview.js <svelte|vue> path/to/Component.<ext>`, when a maintainer ports your submission into `src/data/components/`. So a fresh `submissions/` PR won't show a live preview yet; that's expected, not a bug.
+
+Anything else (Angular, plain vanilla JS, jQuery, etc.) is still fully accepted — it just displays as code + documentation instead of an interactive render, since the gallery doesn't have a compile pipeline for those yet.
 
 ### Recommended (not required)
 

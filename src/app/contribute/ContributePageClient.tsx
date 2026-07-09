@@ -95,12 +95,12 @@ const steps = [
 const livePreviewStack = [
   { label: "React (TypeScript or JavaScript)", detail: ".tsx / .jsx — renders live in the app" },
   { label: "Plain HTML/CSS", detail: ".html + optional .css — renders live in a sandboxed iframe" },
+  { label: "Svelte", detail: ".svelte — compiled with the real Svelte compiler, renders live in a sandboxed iframe" },
+  { label: "Vue (incl. <script setup>)", detail: ".vue — compiled with the real @vue/compiler-sfc, renders live in a sandboxed iframe" },
 ];
 
 const codeOnlyStack = [
-  { label: "Vue", detail: ".vue — accepted, code + docs only for now" },
   { label: "Angular", detail: ".ts components — accepted, code + docs only for now" },
-  { label: "Svelte", detail: ".svelte — accepted, code + docs only for now" },
   { label: "Vanilla JS, jQuery, or anything else", detail: "accepted, code + docs only" },
 ];
 
@@ -268,10 +268,12 @@ export function ContributePageClient() {
           <div className="mt-4 flex gap-3 p-4 rounded-xl border border-amber-500/30 bg-amber-500/5">
             <AlertCircle size={15} className="text-amber-500 shrink-0 mt-0.5" />
             <p className="text-sm text-muted-foreground">
-              <strong className="text-amber-400">Why the split:</strong> React renders directly in this Next.js app,
-              and plain HTML/CSS renders safely in a sandboxed iframe — both are real, working previews. Other
-              frameworks would need their own runtime bundled into the gallery to render live; until that happens,
-              they're still fully accepted, just shown as code + documentation instead.
+              <strong className="text-amber-400">Why the split:</strong> React renders directly in this Next.js app.
+              HTML/CSS, Svelte, and Vue each render in a sandboxed iframe (<code className="text-brand">sandbox=&quot;allow-scripts&quot;</code>,
+              no access to this page) — Svelte and Vue submissions are compiled once with their real compilers when a
+              maintainer ports them into the gallery, not on every page load. Other frameworks would need a similar
+              compile pipeline to render live; until that happens, they're still fully accepted, just shown as code +
+              documentation instead.
             </p>
           </div>
         </section>

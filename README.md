@@ -26,14 +26,16 @@ OpenUI Hub is a free, open-source UI component library platform for React. Brows
 
 ## Supported Technology Stack
 
-OpenUI Hub accepts components built with **any language or framework** — React, Vue, Angular, Svelte, plain HTML/CSS, vanilla JS, and more. Two stacks get a real, interactive live preview in the gallery today:
+OpenUI Hub accepts components built with **any language or framework** — React, Vue, Angular, Svelte, plain HTML/CSS, vanilla JS, and more. Four stacks get a real, interactive live preview in the gallery today:
 
 | Stack | Main file | Preview |
 |---|---|---|
 | **React** (TypeScript or JavaScript) | `ComponentName.tsx` / `.jsx` | Rendered live in the app |
 | **Plain HTML/CSS** | `ComponentName.html` (+ optional `.css`) | Rendered live in a sandboxed iframe |
+| **Svelte** | `ComponentName.svelte` | Compiled with the real Svelte compiler, rendered live in a sandboxed iframe |
+| **Vue** (incl. `<script setup>`) | `ComponentName.vue` | Compiled with the real `@vue/compiler-sfc`, rendered live in a sandboxed iframe |
 
-Anything else is still accepted and displayed with full code + docs — it just won't have an interactive preview until that framework's runtime is bundled into the gallery.
+Anything else is still accepted and displayed with full code + docs — it just won't have an interactive preview until that framework has a compile pipeline in the gallery.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full submission requirements.
 
