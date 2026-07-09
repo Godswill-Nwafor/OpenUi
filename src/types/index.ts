@@ -90,6 +90,14 @@ export interface ComponentDoc {
   installation?: string;
   relatedComponents?: string[];
   dependencies?: string[];
+  /**
+   * Pre-compiled, self-contained JS bundle for a live preview of a
+   * non-React/HTML component (Svelte, Vue). Generated once via
+   * `scripts/compile-preview.js` when the component is added — never
+   * compiled at request time. Rendered in a sandboxed iframe
+   * (sandbox="allow-scripts", no allow-same-origin) by SandboxedScriptPreview.
+   */
+  compiledPreview?: string;
 }
 
 export interface PropDefinition {

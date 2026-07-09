@@ -1,0 +1,12 @@
+{
+  "name": "Toggle Switch",
+  "description": "An accessible on/off toggle switch built as a Vue 3 SFC with v-model support.",
+  "author": "Godswill Nwafor",
+  "githubUsername": "Godswill-Nwafor",
+  "category": "inputs",
+  "framework": "Vue",
+  "language": "Vue SFC",
+  "styling": "CSS",
+  "version": "1.0.0",
+  "tags": ["toggle", "switch", "checkbox", "input", "vue", "accessible"]
+}

@@ -31,8 +31,12 @@ export const contributors: Contributor[] = [
       "status-badge",
       // Dividers
       "gradient-divider",
+      // Buttons (Svelte)
+      "like-button",
+      // Inputs (Vue)
+      "toggle-switch",
     ],
-    contributionCount: 14,
+    contributionCount: 16,
     joinedAt: "2026-06-25",
   },
   {

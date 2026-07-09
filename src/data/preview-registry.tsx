@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 import { PreviewWrapper } from "@/components/ui/PreviewWrapper";
 import { HtmlPreview } from "@/components/ui/HtmlPreview";
+import { SandboxedScriptPreview } from "@/components/ui/SandboxedScriptPreview";
 import { getComponentById } from "@/data";
 
 import {
@@ -154,6 +155,17 @@ function getHtmlMarkup(id: string): string | null {
   return comp.demoCode || comp.code;
 }
 
+/**
+ * Svelte/Vue components get a real live preview too, via a pre-compiled
+ * bundle (see scripts/compile-preview.js) run in a sandboxed iframe — not
+ * compiled at request time. Falls back to null (code + docs only) for any
+ * component that hasn't had that compile step run yet.
+ */
+function getCompiledBundle(id: string): string | null {
+  const comp = getComponentById(id);
+  return comp?.compiledPreview ?? null;
+}
+
 /** Card thumbnail — scaled down into h-44 */
 export function getPreview(id: string): ReactNode | null {
   const c = configs[id];
@@ -174,6 +186,15 @@ export function getPreview(id: string): ReactNode | null {
     );
   }
 
+  const bundle = getCompiledBundle(id);
+  if (bundle) {
+    return (
+      <div className={`h-44 overflow-hidden ${light}`}>
+        <SandboxedScriptPreview bundle={bundle} className="h-44" />
+      </div>
+    );
+  }
+
   return null;
 }
 
@@ -185,6 +206,11 @@ export function getDetailPreview(id: string): { node: ReactNode; bg: string } | 
   const html = getHtmlMarkup(id);
   if (html) {
     return { node: <HtmlPreview html={html} className="h-80" />, bg: light };
+  }
+
+  const bundle = getCompiledBundle(id);
+  if (bundle) {
+    return { node: <SandboxedScriptPreview bundle={bundle} className="h-80" />, bg: light };
   }
 
   return null;

@@ -53,9 +53,13 @@ const REQUIRED_METADATA_FIELDS = [
 const ACCEPTED_EXTENSIONS = ["tsx", "jsx", "ts", "js", "vue", "svelte", "html"];
 
 // Frameworks/languages with a real, live-rendered preview in the gallery
-// (see src/data/preview-registry.tsx). Anything else is still accepted —
-// it just shows code + docs instead of an interactive preview.
-const LIVE_PREVIEW_FRAMEWORKS = ["react", "html/css", "html", "css"];
+// (see src/data/preview-registry.tsx). React and HTML/CSS render directly;
+// Svelte and Vue render via a pre-compiled bundle (scripts/compile-preview.js)
+// run once when a maintainer ports the submission into src/data/components/ —
+// so a fresh submissions/ PR itself won't have a live preview until that
+// compile step happens. Anything else is still accepted — it just shows
+// code + docs instead of an interactive preview.
+const LIVE_PREVIEW_FRAMEWORKS = ["react", "html/css", "html", "css", "svelte", "vue"];
 
 const README_REQUIRED_SECTIONS = ["Installation", "Usage"];
 
@@ -145,6 +149,11 @@ function validateMainFile(componentDir, componentName) {
         `    metadata.json "framework" field reflects what you actually used.`
       );
     }
+  } else if (main.ext === "svelte" || main.ext === "vue") {
+    pass(
+      `Component source uses .${main.ext} — gets a live preview once a maintainer runs ` +
+      `scripts/compile-preview.js and ports it into src/data/components/`
+    );
   } else {
     pass(`Component source uses .${main.ext} — accepted, no live preview in the gallery yet`);
   }

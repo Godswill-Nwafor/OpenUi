@@ -1,0 +1,12 @@
+{
+  "name": "Like Button",
+  "description": "An animated heart toggle button with a like count, built in Svelte.",
+  "author": "Godswill Nwafor",
+  "githubUsername": "Godswill-Nwafor",
+  "category": "buttons",
+  "framework": "Svelte",
+  "language": "Svelte",
+  "styling": "CSS",
+  "version": "1.0.0",
+  "tags": ["button", "like", "heart", "toggle", "svelte", "animated"]
+}
