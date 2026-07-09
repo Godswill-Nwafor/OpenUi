@@ -2,7 +2,10 @@
 /**
  * OpenUI Hub — Component Submission Validator
  *
- * Validates that a component folder meets all OpenUI Hub contribution standards.
+ * Validates that a component folder meets OpenUI Hub's structural
+ * contribution standards. Any language/framework is accepted (React, Vue,
+ * Angular, Svelte, plain HTML/CSS, vanilla JS, etc) and any category —
+ * this validator checks submission *structure*, not tech-stack choice.
  *
  * Usage:
  *   node scripts/validate-component.js <path-to-component-folder>
@@ -13,9 +16,9 @@
  * Checks:
  *   - Folder exists and is a directory
  *   - PascalCase naming convention
- *   - Required files: ComponentName.tsx, metadata.json, README.md, preview.png
- *   - metadata.json: valid JSON, all required fields present and correct
- *   - Tech stack: React, TypeScript, Tailwind CSS
+ *   - Required files: ComponentName.<ext>, metadata.json, README.md, preview.png
+ *   - metadata.json: valid JSON, all required fields present
+ *   - category: reasonable slug format (new categories are welcome)
  *   - README.md: required sections present
  *
  * Exit codes:
@@ -45,22 +48,22 @@ const REQUIRED_METADATA_FIELDS = [
   "tags",
 ];
 
-const VALID_FRAMEWORKS = ["React"];
-const VALID_LANGUAGES = ["TypeScript"];
-const VALID_STYLING = ["Tailwind CSS"];
+// Any of these extensions is accepted as the main source file — the platform
+// doesn't restrict which language/framework a component is authored in.
+const ACCEPTED_EXTENSIONS = ["tsx", "jsx", "ts", "js", "vue", "svelte", "html"];
 
-const VALID_CATEGORIES = [
-  "buttons", "cards", "forms", "inputs", "navbars", "footers",
-  "heroes", "pricing", "testimonials", "dashboards", "tables",
-  "charts", "badges", "avatars", "alerts", "modals", "drawers",
-  "accordions", "dropdowns", "breadcrumbs", "pagination", "loaders",
-  "skeletons", "tooltips", "tabs", "carousels",
-];
+// Frameworks/languages with a real, live-rendered preview in the gallery
+// (see src/data/preview-registry.tsx). Anything else is still accepted —
+// it just shows code + docs instead of an interactive preview.
+const LIVE_PREVIEW_FRAMEWORKS = ["react", "html/css", "html", "css"];
 
-const README_REQUIRED_SECTIONS = ["Installation", "Usage", "Props"];
+const README_REQUIRED_SECTIONS = ["Installation", "Usage"];
 
 // PascalCase: starts with uppercase letter, only letters and digits
 const PASCALCASE_RE = /^[A-Z][a-zA-Z0-9]+$/;
+
+// lowercase-kebab-case slug, safe as a URL segment / object key
+const CATEGORY_SLUG_RE = /^[a-z][a-z0-9-]*$/;
 
 // ── Result collectors ─────────────────────────────────────────────────────────
 
@@ -86,75 +89,64 @@ function validateNaming(componentName) {
   }
 }
 
-function validateMainFile(componentDir, componentName) {
-  const tsxPath = path.join(componentDir, `${componentName}.tsx`);
+/** Find the main source file: ComponentName.<any accepted extension>. */
+function findMainFile(componentDir, componentName) {
+  for (const ext of ACCEPTED_EXTENSIONS) {
+    const candidate = path.join(componentDir, `${componentName}.${ext}`);
+    if (fs.existsSync(candidate)) return { path: candidate, ext };
+  }
+  return null;
+}
 
-  if (!fs.existsSync(tsxPath)) {
+function validateMainFile(componentDir, componentName) {
+  const main = findMainFile(componentDir, componentName);
+
+  if (!main) {
     error(
-      `Missing main component file: "${componentName}.tsx"\n` +
-      `    The .tsx file must be named exactly the same as the folder (PascalCase).`
+      `Missing main component file: "${componentName}.<ext>"\n` +
+      `    The file must be named exactly the same as the folder (PascalCase) and use\n` +
+      `    one of these extensions: ${ACCEPTED_EXTENSIONS.join(", ")}`
     );
     return;
   }
 
-  pass(`${componentName}.tsx exists`);
+  pass(`${componentName}.${main.ext} exists`);
 
-  const source = fs.readFileSync(tsxPath, "utf8");
+  const source = fs.readFileSync(main.path, "utf8");
 
-  // Must be TypeScript (.tsx extension already checked by filename)
-  pass("Component uses TypeScript (.tsx)");
+  if (main.ext === "html") {
+    // Plain HTML/CSS components get a real live preview via sandboxed iframe.
+    pass("Component uses HTML — will render via live iframe preview");
+    const cssSibling = path.join(componentDir, `${componentName}.css`);
+    if (fs.existsSync(cssSibling)) {
+      pass(`${componentName}.css exists`);
+    } else if (!/<style[\s>]/i.test(source)) {
+      warn(
+        `No "${componentName}.css" file and no inline <style> block found.\n` +
+        `    Add a stylesheet or inline <style> so the component actually looks styled.`
+      );
+    }
+  } else if (main.ext === "tsx" || main.ext === "jsx") {
+    const hasReact =
+      source.includes("from 'react'") ||
+      source.includes('from "react"') ||
+      source.includes("React.") ||
+      /<[A-Z][a-zA-Z]*[\s/>]/.test(source) || // JSX element
+      source.includes("JSX.Element") ||
+      source.includes("React.ReactNode") ||
+      source.includes("React.FC");
 
-  // React usage — check for JSX syntax or React import
-  const hasReact =
-    source.includes("from 'react'") ||
-    source.includes('from "react"') ||
-    source.includes("React.") ||
-    /<[A-Z][a-zA-Z]*[\s/>]/.test(source) || // JSX element
-    source.includes("JSX.Element") ||
-    source.includes("React.ReactNode") ||
-    source.includes("React.FC");
-
-  if (hasReact) {
-    pass("Component uses React");
+    if (hasReact) {
+      pass("Component uses React");
+    } else {
+      warn(
+        `Could not confirm React usage in "${componentName}.${main.ext}".\n` +
+        `    If this isn't a React component, that's fine — just make sure the\n` +
+        `    metadata.json "framework" field reflects what you actually used.`
+      );
+    }
   } else {
-    warn(
-      `Could not confirm React usage in "${componentName}.tsx".\n` +
-      `    Ensure the component uses React/JSX syntax.`
-    );
-  }
-
-  // Tailwind CSS — check for className usage
-  if (source.includes('className="') || source.includes("className={") || source.includes("className:`")) {
-    pass("Component uses Tailwind CSS (className detected)");
-  } else {
-    warn(
-      `No className attribute detected in "${componentName}.tsx".\n` +
-      `    Styling must use Tailwind CSS utility classes.`
-    );
-  }
-
-  // Forbidden: jQuery
-  if (
-    source.includes("import $") ||
-    source.includes('require("jquery")') ||
-    source.includes("require('jquery')")
-  ) {
-    error("jQuery is not allowed. Use React with Tailwind CSS instead.");
-  }
-
-  // Forbidden: Vue
-  if (source.includes("defineComponent") || /from ['"]vue['"]/i.test(source)) {
-    error("Vue is not accepted. Only React + TypeScript + Tailwind CSS components are allowed in v1.0.");
-  }
-
-  // Forbidden: Angular
-  if (source.includes("@Component({") || source.includes("@NgModule(")) {
-    error("Angular is not accepted. Only React + TypeScript + Tailwind CSS components are allowed in v1.0.");
-  }
-
-  // Forbidden: .jsx extension imports
-  if (/from ['"][^'"]+\.jsx['"]/i.test(source)) {
-    error("Importing .jsx files is not allowed. All imports must be TypeScript (.tsx/.ts).");
+    pass(`Component source uses .${main.ext} — accepted, no live preview in the gallery yet`);
   }
 }
 
@@ -167,7 +159,7 @@ function validateRequiredFiles(componentDir) {
       error(
         `Missing required file: "${file}"\n` +
         `    Every component submission must include:\n` +
-        `      ComponentName.tsx  metadata.json  README.md  preview.png`
+        `      ComponentName.<ext>  metadata.json  README.md  preview.png`
       );
     }
   }
@@ -200,44 +192,27 @@ function validateMetadata(componentDir) {
     }
   }
 
-  // framework must be "React"
-  if (metadata.framework !== undefined) {
-    if (!VALID_FRAMEWORKS.includes(metadata.framework)) {
-      error(
-        `metadata.json "framework" must be exactly "React". Got: "${metadata.framework}"\n` +
-        `    OpenUI Hub v1.0 only accepts React components.`
-      );
+  // framework/language/styling: any non-empty value is accepted. Flag
+  // (informationally) whether it'll get a live interactive preview.
+  if (metadata.framework) {
+    const fw = String(metadata.framework).toLowerCase();
+    if (LIVE_PREVIEW_FRAMEWORKS.includes(fw)) {
+      pass(`metadata.json "framework" is "${metadata.framework}" — gets a live interactive preview`);
+    } else {
+      pass(`metadata.json "framework" is "${metadata.framework}" — accepted (code + docs preview, no live render yet)`);
     }
   }
 
-  // language must be "TypeScript"
-  if (metadata.language !== undefined) {
-    if (!VALID_LANGUAGES.includes(metadata.language)) {
-      error(
-        `metadata.json "language" must be exactly "TypeScript". Got: "${metadata.language}"\n` +
-        `    Only TypeScript (.tsx) components are accepted.`
-      );
-    }
-  }
-
-  // styling must be "Tailwind CSS"
-  if (metadata.styling !== undefined) {
-    if (!VALID_STYLING.includes(metadata.styling)) {
-      error(
-        `metadata.json "styling" must be exactly "Tailwind CSS". Got: "${metadata.styling}"\n` +
-        `    Only Tailwind CSS is accepted for styling.`
-      );
-    }
-  }
-
-  // category must be one of the valid values
+  // category: any reasonably-formatted slug is accepted — new categories
+  // are auto-registered on the site instead of being rejected.
   if (metadata.category !== undefined) {
-    if (VALID_CATEGORIES.includes(metadata.category)) {
-      pass(`metadata.json "category" is valid: "${metadata.category}"`);
+    if (CATEGORY_SLUG_RE.test(metadata.category)) {
+      pass(`metadata.json "category" is a valid slug: "${metadata.category}"`);
     } else {
       error(
-        `metadata.json "category" is not a valid project category. Got: "${metadata.category}"\n` +
-        `    Valid categories: ${VALID_CATEGORIES.join(", ")}`
+        `metadata.json "category" must be lowercase-kebab-case (letters, digits, hyphens, ` +
+        `starting with a letter). Got: "${metadata.category}"\n` +
+        `    Examples: "buttons", "loading-spinners", "data-viz"`
       );
     }
   }
@@ -285,7 +260,8 @@ function validateReadme(componentDir) {
     } else {
       warn(
         `README.md is missing a "${section}" section.\n` +
-        `    README.md must include: Purpose, Installation, Usage, Props, Dependencies, Example.`
+        `    README.md should include: Purpose, Installation, Usage, Example ` +
+        `(and Props if your component takes configurable inputs).`
       );
     }
   }

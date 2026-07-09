@@ -1,6 +1,8 @@
 "use client";
 import type { ReactNode } from "react";
 import { PreviewWrapper } from "@/components/ui/PreviewWrapper";
+import { HtmlPreview } from "@/components/ui/HtmlPreview";
+import { getComponentById } from "@/data";
 
 import {
   PrimaryButtonPreview, OutlineButtonPreview, GhostButtonPreview,
@@ -136,20 +138,54 @@ const configs: Record<string, Config> = {
   "status-badge": { render: () => <StatusBadgePreview />, scale: 0.75, bg: light },
 };
 
+/** Frameworks/languages that get a real live-rendered preview via iframe. */
+const HTML_FRAMEWORKS = new Set(["html", "html/css", "css"]);
+
+/**
+ * Components authored in plain HTML/CSS don't have a hand-registered React
+ * preview above, but they can still render for real — via a sandboxed iframe
+ * fed their actual markup, instead of falling back to a static placeholder.
+ */
+function getHtmlMarkup(id: string): string | null {
+  const comp = getComponentById(id);
+  if (!comp) return null;
+  const framework = comp.metadata.framework.trim().toLowerCase();
+  if (!HTML_FRAMEWORKS.has(framework)) return null;
+  return comp.demoCode || comp.code;
+}
+
 /** Card thumbnail — scaled down into h-44 */
 export function getPreview(id: string): ReactNode | null {
   const c = configs[id];
-  if (!c) return null;
-  return (
-    <PreviewWrapper scale={c.scale} bg={c.bg}>
-      {c.render()}
-    </PreviewWrapper>
-  );
+  if (c) {
+    return (
+      <PreviewWrapper scale={c.scale} bg={c.bg}>
+        {c.render()}
+      </PreviewWrapper>
+    );
+  }
+
+  const html = getHtmlMarkup(id);
+  if (html) {
+    return (
+      <div className={`h-44 overflow-hidden ${light}`}>
+        <HtmlPreview html={html} className="h-44" />
+      </div>
+    );
+  }
+
+  return null;
 }
 
 /** Detail page — full-size with matching background */
 export function getDetailPreview(id: string): { node: ReactNode; bg: string } | null {
   const c = configs[id];
-  if (!c) return null;
-  return { node: c.render(), bg: c.bg };
+  if (c) return { node: c.render(), bg: c.bg };
+
+  const html = getHtmlMarkup(id);
+  if (html) {
+    return { node: <HtmlPreview html={html} className="h-80" />, bg: light };
+  }
+
+  return null;
 }

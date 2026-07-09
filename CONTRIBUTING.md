@@ -27,30 +27,23 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 
 ## Supported Technology Stack
 
-OpenUI Hub v1.0 **only accepts** components built with the official project stack. Submissions that use unsupported technologies will be automatically rejected.
+OpenUI Hub accepts components built with **any language or framework** — React, Vue, Angular, Svelte, plain HTML/CSS, vanilla JS, jQuery, whatever you used to build it. The validator checks submission *structure* (folder layout, required files, complete metadata), not your tech-stack choice.
 
-### Required
+### Live preview support
 
-| Technology | Requirement |
-|---|---|
-| **Framework** | React |
-| **Language** | TypeScript (`.tsx` files only) |
-| **Styling** | Tailwind CSS |
-| **Icons** | Lucide React (recommended) |
-| **Project Framework** | Next.js |
+Two authoring styles get a real, interactive live preview in the gallery today:
 
-### Not Accepted
+| Stack | Main file | Preview |
+|---|---|---|
+| **React** (TypeScript or JavaScript) | `ComponentName.tsx` / `.jsx` | Rendered live in the app |
+| **Plain HTML/CSS** | `ComponentName.html` (+ optional `ComponentName.css`) | Rendered live in a sandboxed iframe |
 
-The following technologies are **not accepted** in v1.0:
+Anything else (Vue, Angular, Svelte, vanilla JS, jQuery, etc.) is still fully accepted — it just displays as code + documentation instead of an interactive render, since the gallery doesn't bundle those frameworks' runtimes yet. That may change in future versions.
 
-- JavaScript (`.jsx`) — TypeScript only
-- Vue, Angular, Svelte, Solid.js — React only
-- Bootstrap, Foundation, or other CSS frameworks — Tailwind CSS only
-- jQuery — not accepted
-- Flutter, Dart — web-only React components
-- Plain HTML/CSS without React
+### Recommended (not required)
 
-> **Future versions** may support additional frameworks. For v1.0, only React + TypeScript + Tailwind CSS is accepted. No exceptions.
+- **Icons**: Lucide React, if you're in React
+- **Styling**: Tailwind CSS, if you want to match the rest of the gallery's look — but plain CSS, Sass, or any other styling approach is fine too
 
 ---
 
@@ -60,11 +53,13 @@ Every component submission **must** follow this exact folder structure. Missing 
 
 ```
 ComponentName/
-├── ComponentName.tsx     # React + TypeScript component (required)
+├── ComponentName.<ext>   # Your component source (required)
 ├── metadata.json         # Component metadata — all fields required
 ├── README.md             # Documentation (required)
 └── preview.png           # Screenshot or preview image (required)
 ```
+
+The main source file must be named exactly like the folder (PascalCase) and use one of these extensions: `.tsx`, `.jsx`, `.ts`, `.js`, `.vue`, `.svelte`, `.html`. If you're submitting plain HTML/CSS, put your styles in a sibling `ComponentName.css` file or an inline `<style>` block.
 
 Place your component folder inside `submissions/`:
 
@@ -81,9 +76,9 @@ submissions/
 
 | File | Required | Notes |
 |---|---|---|
-| `ComponentName.tsx` | Yes | Main React component in TypeScript. File name must exactly match the folder name. |
+| `ComponentName.<ext>` | Yes | Main component source, in whatever language/framework you used. File name must exactly match the folder name. |
 | `metadata.json` | Yes | All required fields must be present. Fails validation if missing or incomplete. |
-| `README.md` | Yes | Must include Purpose, Installation, Usage, Props, and Example sections. |
+| `README.md` | Yes | Must include Installation and Usage sections at minimum (add Props if your component takes configurable inputs). |
 | `preview.png` | Yes | Screenshot or rendered preview image of the component. |
 
 ---
@@ -115,33 +110,38 @@ Every component must include a `metadata.json` file with all required fields pop
 | `description` | Yes | Short description of what the component does |
 | `author` | Yes | Your full name or display name |
 | `githubUsername` | Yes | Your GitHub username — used for attribution |
-| `category` | Yes | One of the valid categories listed below |
-| `framework` | Yes | Must be exactly `"React"` |
-| `language` | Yes | Must be exactly `"TypeScript"` |
-| `styling` | Yes | Must be exactly `"Tailwind CSS"` |
+| `category` | Yes | Lowercase-kebab-case slug (e.g. `"buttons"`, `"loading-spinners"`). See below. |
+| `framework` | Yes | Whatever you built it with — `"React"`, `"Vue"`, `"HTML/CSS"`, etc. Only `"React"` and `"HTML/CSS"` get a live interactive preview today. |
+| `language` | Yes | e.g. `"TypeScript"`, `"JavaScript"`, `"HTML"` |
+| `styling` | Yes | e.g. `"Tailwind CSS"`, `"CSS"`, `"Sass"` |
 | `version` | Yes | Semantic version — start new components at `"1.0.0"` |
 | `tags` | Yes | Array of descriptive strings for search (minimum 1 tag) |
 
 If `metadata.json` is missing or any required field is empty or invalid, the PR will fail automated validation and cannot be merged.
 
-### Valid Categories
+### Categories
 
-`buttons` · `cards` · `forms` · `inputs` · `navbars` · `footers` · `heroes` · `pricing` · `testimonials` · `dashboards` · `tables` · `charts` · `badges` · `avatars` · `alerts` · `modals` · `drawers` · `accordions` · `dropdowns` · `breadcrumbs` · `pagination` · `loaders` · `skeletons` · `tooltips` · `tabs` · `carousels`
+Use an existing category where it fits — check the list on the [Categories page](https://github.com/Godswill-Nwafor/OpenUi) or in [`src/lib/constants.ts`](src/lib/constants.ts). Common ones: `buttons` · `cards` · `forms` · `inputs` · `navbars` · `footers` · `heroes` · `pricing` · `testimonials` · `dashboards` · `tables` · `charts` · `badges` · `avatars` · `alerts` · `modals` · `drawers` · `accordions` · `dropdowns` · `breadcrumbs` · `pagination` · `loaders` · `skeletons` · `tooltips` · `tabs` · `carousels`.
+
+**New categories are welcome.** If nothing fits, pick a new lowercase-kebab-case slug (e.g. `"data-viz"`, `"loading-spinners"`) — it's automatically registered on the site once your component is merged, with an auto-generated label and icon. No code change required.
 
 ---
 
 ## README Requirements
 
-Every component must include a `README.md` that covers all of the following sections:
+Every component must include a `README.md`. At minimum it must cover:
 
-1. **Component Purpose** — What the component does and when to use it
-2. **Installation** — Any dependencies required (prefer zero dependencies)
-3. **Usage** — How to use the component with a code example
-4. **Props** — Table of all props with type, default, required, and description
-5. **Dependencies** — List any npm packages required
+1. **Installation** — Any dependencies required (prefer zero dependencies)
+2. **Usage** — How to use the component with a code example
+
+And ideally also:
+
+3. **Component Purpose** — What the component does and when to use it
+4. **Props** — Table of all props with type, default, required, and description (skip if your component has no configurable props — e.g. a static HTML/CSS snippet)
+5. **Dependencies** — List any packages required
 6. **Example Usage** — A complete working code example
 
-### README Template
+### README Template (React example)
 
 ```markdown
 # ComponentName
@@ -185,14 +185,39 @@ export default function App() {
 \`\`\`
 ```
 
+### README Template (HTML/CSS example)
+
+```markdown
+# ComponentName
+
+Brief description of the component.
+
+## Installation
+
+\`\`\`bash
+# No installation needed — copy ComponentName.html (and ComponentName.css) into your project
+\`\`\`
+
+## Usage
+
+\`\`\`html
+<link rel="stylesheet" href="ComponentName.css" />
+<!-- paste the markup from ComponentName.html -->
+\`\`\`
+
+## Dependencies
+
+- None
+```
+
 ---
 
 ## Naming Conventions
 
 ### Component Names — PascalCase Required
 
-All component names, folder names, and `.tsx` file names must use **PascalCase**.
-The folder name, the file name, and the exported component function name must all match exactly.
+All component names, folder names, and source file names must use **PascalCase**.
+The folder name, the file name, and the exported component/function name (where applicable) must all match exactly.
 
 **Correct:**
 ```
@@ -258,7 +283,7 @@ chore: upgrade framer-motion to 11.x
 5. **Build** your component in the `submissions/` folder:
    ```bash
    mkdir submissions/MyComponentName
-   # Create MyComponentName.tsx, metadata.json, README.md, preview.png
+   # Create MyComponentName.<ext>, metadata.json, README.md, preview.png
    ```
 6. **Validate** locally before submitting:
    ```bash
@@ -285,12 +310,12 @@ Every contributor must:
 - ✓ Clone the repository locally
 - ✓ Create a new feature branch for each PR
 - ✓ Build **only one component per Pull Request**
-- ✓ Use React + TypeScript + Tailwind CSS
+- ✓ Use any language/framework — React, Vue, Angular, Svelte, plain HTML/CSS, vanilla JS, etc.
 - ✓ Include all four required files in the submission folder
 - ✓ Follow PascalCase naming for all component files and folders
 - ✓ Ensure responsiveness across mobile, tablet, and desktop
 - ✓ Ensure accessibility (ARIA attributes, keyboard navigation)
-- ✓ Write clean, readable TypeScript code
+- ✓ Write clean, readable, well-organized code
 
 ---
 
@@ -300,18 +325,17 @@ Before opening a PR, verify every item is satisfied:
 
 **Structure**
 - [ ] Component folder is named with PascalCase (`ComponentName/`)
-- [ ] `ComponentName.tsx` exists and its name matches the folder name exactly
+- [ ] `ComponentName.<ext>` exists and its name matches the folder name exactly
 - [ ] `metadata.json` exists and all 10 required fields are filled
-- [ ] `README.md` exists with Purpose, Installation, Usage, Props, and Example sections
+- [ ] `README.md` exists with Installation, Usage, and (if applicable) Props sections
 - [ ] `preview.png` exists (screenshot of the component)
 
 **Code Quality**
-- [ ] Component is written in React + TypeScript (`.tsx` file)
-- [ ] Styling uses only Tailwind CSS utility classes
-- [ ] All props are typed with TypeScript interfaces
-- [ ] No unnecessary external npm dependencies added
-- [ ] `npm run lint` passes with no errors
-- [ ] `npm run type-check` passes with no TypeScript errors
+- [ ] `metadata.json` accurately describes the language/framework/styling you actually used
+- [ ] If TypeScript: props are typed with interfaces, no implicit `any`
+- [ ] No unnecessary external dependencies added
+- [ ] `npm run lint` passes with no errors (for `.ts`/`.tsx`/`.js`/`.jsx` submissions)
+- [ ] `npm run type-check` passes with no TypeScript errors (for TypeScript submissions)
 
 **Component Quality**
 - [ ] Fully responsive across mobile, tablet, and desktop
@@ -341,6 +365,8 @@ Every PR automatically triggers GitHub Actions that run the following checks:
 | Required files | Automated file check | Yes |
 | Folder structure | Automated structure check | Yes |
 
+Lint, TypeScript, and Build checks run against the whole app and only fail because of your submission if your source file is `.ts`/`.tsx`/`.js`/`.jsx` and has actual errors — HTML/CSS/Vue/etc. submissions aren't linted or type-checked by these project-wide commands.
+
 **If any check fails:** The PR will display red ✗ badges on failed checks and **cannot be merged** until all issues are resolved.
 
 ### Running Validation Locally
@@ -358,6 +384,8 @@ npm run build
 ---
 
 ## Coding Standards
+
+These apply if you're using React + TypeScript + Tailwind CSS. If you're using a different stack, write clean, well-organized code idiomatic to that language/framework instead.
 
 ### TypeScript
 

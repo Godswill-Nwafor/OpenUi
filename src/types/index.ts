@@ -1,34 +1,60 @@
-export type Framework = "react" | "vue" | "angular" | "flutter";
+/**
+ * Any language/framework is accepted (React, Vue, Angular, Svelte, HTML/CSS,
+ * vanilla JS, etc). It's a free-form string rather than a closed union so new
+ * ones don't require a code change. "React" and "HTML/CSS" (case-insensitive)
+ * get a real live preview in the gallery — see src/data/preview-registry.tsx.
+ * COMMON_FRAMEWORKS below is just a suggestion list for UI hints, not a limit.
+ */
+export type Framework = string;
+
+export const COMMON_FRAMEWORKS = [
+  "React",
+  "HTML/CSS",
+  "Vue",
+  "Angular",
+  "Svelte",
+  "Vanilla JS",
+] as const;
 
 export type ComponentStatus = "approved" | "pending" | "rejected";
 
-export type Category =
-  | "buttons"
-  | "cards"
-  | "forms"
-  | "inputs"
-  | "navbars"
-  | "footers"
-  | "heroes"
-  | "pricing"
-  | "testimonials"
-  | "dashboards"
-  | "tables"
-  | "charts"
-  | "badges"
-  | "avatars"
-  | "alerts"
-  | "modals"
-  | "drawers"
-  | "accordions"
-  | "dropdowns"
-  | "breadcrumbs"
-  | "pagination"
-  | "loaders"
-  | "skeletons"
-  | "tooltips"
-  | "tabs"
-  | "carousels";
+/**
+ * Category is a free-form slug (lowercase-kebab-case), not a closed union —
+ * contributors can introduce new categories through component submissions.
+ * COMMON_CATEGORIES below seeds the known set with curated labels/icons; any
+ * category not in that list still works, it just gets an auto-generated
+ * label/icon (see CATEGORIES in src/lib/constants.ts).
+ */
+export type Category = string;
+
+export const COMMON_CATEGORIES = [
+  "buttons",
+  "cards",
+  "forms",
+  "inputs",
+  "navbars",
+  "footers",
+  "heroes",
+  "pricing",
+  "testimonials",
+  "dashboards",
+  "tables",
+  "charts",
+  "badges",
+  "avatars",
+  "alerts",
+  "modals",
+  "drawers",
+  "accordions",
+  "dropdowns",
+  "breadcrumbs",
+  "pagination",
+  "loaders",
+  "skeletons",
+  "tooltips",
+  "tabs",
+  "carousels",
+] as const;
 
 export interface ComponentAuthor {
   name: string;

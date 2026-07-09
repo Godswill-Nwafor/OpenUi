@@ -26,27 +26,16 @@ OpenUI Hub is a free, open-source UI component library platform for React. Brows
 
 ## Supported Technology Stack
 
-OpenUI Hub v1.0 **only accepts** components built with the official project stack.
+OpenUI Hub accepts components built with **any language or framework** — React, Vue, Angular, Svelte, plain HTML/CSS, vanilla JS, and more. Two stacks get a real, interactive live preview in the gallery today:
 
-### Required
+| Stack | Main file | Preview |
+|---|---|---|
+| **React** (TypeScript or JavaScript) | `ComponentName.tsx` / `.jsx` | Rendered live in the app |
+| **Plain HTML/CSS** | `ComponentName.html` (+ optional `.css`) | Rendered live in a sandboxed iframe |
 
-| Technology | Requirement |
-|---|---|
-| **Framework** | React |
-| **Language** | TypeScript (`.tsx` files only) |
-| **Styling** | Tailwind CSS |
-| **Icons** | Lucide React (recommended) |
-| **Project Framework** | Next.js |
+Anything else is still accepted and displayed with full code + docs — it just won't have an interactive preview until that framework's runtime is bundled into the gallery.
 
-### Not Accepted in v1.0
-
-- JavaScript (`.jsx`) — TypeScript only
-- Vue, Angular, Svelte — React only
-- Bootstrap, jQuery — Tailwind CSS only
-- Flutter, Dart — web React only
-- Plain HTML/CSS without React
-
-> Submissions using unsupported technologies will fail automated validation and cannot be merged.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full submission requirements.
 
 ---
 
@@ -56,7 +45,7 @@ Every component submission must include exactly these four files:
 
 ```
 ComponentName/
-├── ComponentName.tsx     # React + TypeScript component (required)
+├── ComponentName.<ext>   # Component source — any language/framework (required)
 ├── metadata.json         # Component metadata — all fields required
 ├── README.md             # Documentation (required)
 └── preview.png           # Screenshot or preview image (required)
@@ -86,7 +75,7 @@ All component names must use **PascalCase**.
 | `PricingSection` | `newcomponent` |
 | `DashboardLayout` | `component-test` |
 
-The folder name, `.tsx` file name, and exported component function name must all match exactly.
+The folder name, source file name, and exported component/function name (where applicable) must all match exactly.
 
 ---
 
