@@ -8,6 +8,7 @@ import { pricingComponents } from "./components/pricing";
 import { formComponents } from "./components/forms";
 import { dashboardComponents } from "./components/dashboards";
 import { footerComponents } from "./components/footers";
+import { badgeComponents } from "./components/badges";
 import { contributors, getContributorByComponentId } from "./contributors";
 import { getGitHubAvatarUrl } from "@/lib/github";
 import type { ComponentDoc, ComponentMetadata, Category } from "@/types";
@@ -26,6 +27,7 @@ const raw: ComponentDoc[] = [
   ...formComponents,
   ...dashboardComponents,
   ...footerComponents,
+  ...badgeComponents,
 ];
 
 export const allComponents: ComponentDoc[] = raw.map((comp) => {
@@ -113,5 +115,6 @@ export {
   formComponents,
   dashboardComponents,
   footerComponents,
+  badgeComponents,
   contributors,
 };
