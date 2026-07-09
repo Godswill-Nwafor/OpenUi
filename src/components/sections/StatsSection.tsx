@@ -5,15 +5,20 @@ import { Layers, Users, Tag, Download, Star } from "lucide-react";
 import { SITE_STATS } from "@/lib/constants";
 import { formatNumber } from "@/lib/utils";
 
-const stats = [
-  { icon: Layers, label: "Components", value: SITE_STATS.components, suffix: "+" },
-  { icon: Users, label: "Contributors", value: SITE_STATS.contributors, suffix: "" },
-  { icon: Tag, label: "Categories", value: SITE_STATS.categories, suffix: "" },
-  { icon: Download, label: "Downloads", value: SITE_STATS.downloads, suffix: "+" },
-  { icon: Star, label: "GitHub Stars", value: SITE_STATS.githubStars, suffix: "" },
-];
+interface StatsSectionProps {
+  /** Live star count fetched server-side; falls back to SITE_STATS.githubStars when unavailable. */
+  githubStars?: number;
+}
 
-export function StatsSection() {
+export function StatsSection({ githubStars }: StatsSectionProps) {
+  const stats = [
+    { icon: Layers, label: "Components", value: SITE_STATS.components, suffix: "+" },
+    { icon: Users, label: "Contributors", value: SITE_STATS.contributors, suffix: "" },
+    { icon: Tag, label: "Categories", value: SITE_STATS.categories, suffix: "" },
+    { icon: Download, label: "Downloads", value: SITE_STATS.downloads, suffix: "+" },
+    { icon: Star, label: "GitHub Stars", value: githubStars ?? SITE_STATS.githubStars, suffix: "" },
+  ];
+
   return (
     <section className="border-y border-border bg-card">
       <div className="max-w-5xl mx-auto px-4 py-10">

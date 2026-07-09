@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Layers, Users, Tag, CheckCircle, Clock, Eye, Trash2, Check, X } from "lucide-react";
 import { allComponents } from "@/data";
-import { CATEGORIES, SITE_STATS } from "@/lib/constants";
+import { CATEGORIES } from "@/lib/constants";
 import { formatNumber } from "@/lib/utils";
 
 type AdminTab = "overview" | "components" | "categories" | "contributors";

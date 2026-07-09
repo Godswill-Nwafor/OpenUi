@@ -28,6 +28,34 @@ export interface GitHubPullRequest {
   user: { login: string; avatar_url: string; html_url: string };
 }
 
+export interface GitHubRepoInfo {
+  stargazers_count: number;
+  forks_count: number;
+  open_issues_count: number;
+}
+
+/** Fetch live repo info (stars, forks, open issues) from the GitHub REST API. */
+export async function fetchRepoInfo(): Promise<GitHubRepoInfo | null> {
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`,
+      {
+        headers: {
+          Accept: "application/vnd.github.v3+json",
+          ...(process.env.GITHUB_TOKEN
+            ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+            : {}),
+        },
+        next: { revalidate: 3600 },
+      }
+    );
+    if (!res.ok) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
+}
+
 /** Fetch repo contributors from the GitHub REST API. Requires GITHUB_TOKEN env var for higher rate limits. */
 export async function fetchRepoContributors(): Promise<GitHubContributor[]> {
   try {
