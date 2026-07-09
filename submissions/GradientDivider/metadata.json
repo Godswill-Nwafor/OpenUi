@@ -1,0 +1,12 @@
+{
+  "name": "Gradient Divider",
+  "description": "An animated gradient divider line for visually separating page sections.",
+  "author": "Godswill Nwafor",
+  "githubUsername": "Godswill-Nwafor",
+  "category": "dividers",
+  "framework": "HTML/CSS",
+  "language": "HTML",
+  "styling": "CSS",
+  "version": "1.0.0",
+  "tags": ["divider", "separator", "gradient", "animated", "hr"]
+}

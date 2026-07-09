@@ -29,8 +29,10 @@ export const contributors: Contributor[] = [
       "tabs-nav", "top-navbar",
       // Badges
       "status-badge",
+      // Dividers
+      "gradient-divider",
     ],
-    contributionCount: 13,
+    contributionCount: 14,
     joinedAt: "2026-06-25",
   },
   {

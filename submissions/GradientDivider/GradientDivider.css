@@ -1,0 +1,14 @@
+.gradient-divider {
+  height: 4px;
+  width: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #6366f1, #ec4899, #f59e0b);
+  background-size: 200% 100%;
+  animation: gradient-divider-move 4s ease infinite;
+}
+
+@keyframes gradient-divider-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

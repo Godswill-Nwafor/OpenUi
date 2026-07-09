@@ -38,11 +38,41 @@ const CATEGORY_DEFS: Omit<CategoryInfo, "count">[] = [
   { id: "carousels", label: "Carousels", description: "Image and content carousel/slider components", icon: "GalleryHorizontal" },
 ];
 
+function slugToLabel(slug: string): string {
+  return slug
+    .split("-")
+    .filter(Boolean)
+    .map((w) => w[0].toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
 /** Category counts are derived from actual component data — never hand-maintained. */
-export const CATEGORIES: CategoryInfo[] = CATEGORY_DEFS.map((def) => ({
+const curatedCategories: CategoryInfo[] = CATEGORY_DEFS.map((def) => ({
   ...def,
   count: allComponents.filter((c) => c.metadata.category === def.id).length,
 }));
+
+// A contributor can submit a component under a category that isn't in the
+// curated list above — it's auto-registered here with a generic icon/label
+// instead of being rejected, so new categories don't require a code change.
+const knownCategoryIds = new Set(curatedCategories.map((c) => c.id));
+const discoveredCategoryIds = [
+  ...new Set(
+    allComponents
+      .map((c) => c.metadata.category)
+      .filter((id) => !knownCategoryIds.has(id))
+  ),
+];
+
+const discoveredCategories: CategoryInfo[] = discoveredCategoryIds.map((id) => ({
+  id,
+  label: slugToLabel(id),
+  description: `${slugToLabel(id)} components`,
+  icon: "Layers",
+  count: allComponents.filter((c) => c.metadata.category === id).length,
+}));
+
+export const CATEGORIES: CategoryInfo[] = [...curatedCategories, ...discoveredCategories];
 
 export const SITE_STATS: SiteStats = {
   components: allComponents.length,

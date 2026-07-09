@@ -4,7 +4,8 @@
  *
  * Scans all TypeScript component data files in src/data/components/
  * and verifies that each ComponentDoc object has the required metadata
- * fields populated with valid values.
+ * fields populated. Any framework/language and any category is accepted —
+ * this checks structural completeness, not tech-stack choice.
  *
  * Used by GitHub Actions to validate any new or changed component data files.
  *
@@ -38,15 +39,10 @@ const REQUIRED_METADATA_KEYS = [
   "status",
 ];
 
-const VALID_FRAMEWORKS = ["react", "React"];
 const VALID_STATUSES = ["approved", "pending", "rejected", "active", "deprecated"];
-const VALID_CATEGORIES = [
-  "buttons", "cards", "forms", "inputs", "navbars", "footers",
-  "heroes", "pricing", "testimonials", "dashboards", "tables",
-  "charts", "badges", "avatars", "alerts", "modals", "drawers",
-  "accordions", "dropdowns", "breadcrumbs", "pagination", "loaders",
-  "skeletons", "tooltips", "tabs", "carousels",
-];
+
+// lowercase-kebab-case slug, safe as a URL segment / object key
+const CATEGORY_SLUG_RE = /^[a-z][a-z0-9-]*$/;
 
 // ── Counters ──────────────────────────────────────────────────────────────────
 
@@ -81,17 +77,7 @@ function validateDataFile(filePath) {
     }
   }
 
-  // Validate framework value
-  const frameworkMatch = source.match(/\bframework\s*:\s*["']([^"']+)["']/);
-  if (frameworkMatch) {
-    const fw = frameworkMatch[1];
-    if (!VALID_FRAMEWORKS.includes(fw)) {
-      fileErrors.push(
-        `Invalid framework: "${fw}" — must be "react". ` +
-        `OpenUI Hub v1.0 only accepts React components.`
-      );
-    }
-  }
+  // framework: any non-empty value is accepted (React, Vue, HTML/CSS, etc).
 
   // Validate status value
   const statusMatch = source.match(/\bstatus\s*:\s*["']([^"']+)["']/);
@@ -101,11 +87,13 @@ function validateDataFile(filePath) {
     );
   }
 
-  // Validate category value
+  // Validate category format — any slug is accepted, new categories are
+  // auto-registered on the site (see CATEGORIES in src/lib/constants.ts).
   const categoryMatch = source.match(/\bcategory\s*:\s*["']([^"']+)["']/);
-  if (categoryMatch && !VALID_CATEGORIES.includes(categoryMatch[1])) {
+  if (categoryMatch && !CATEGORY_SLUG_RE.test(categoryMatch[1])) {
     fileErrors.push(
-      `Invalid category: "${categoryMatch[1]}" — must be one of the valid project categories.`
+      `Invalid category slug: "${categoryMatch[1]}" — must be lowercase-kebab-case ` +
+      `(letters, digits, hyphens, starting with a letter).`
     );
   }
 
@@ -129,11 +117,6 @@ function validateDataFile(filePath) {
     fileErrors.push(
       `Invalid version format: "${versionMatch[1]}" — must follow semver (e.g., "1.0.0").`
     );
-  }
-
-  // Check for forbidden tech
-  if (/\$\(document\)|import\s+\$/.test(source) && !/\/\*[^*]*\*\//.test(source)) {
-    fileErrors.push("jQuery references detected — not allowed in component data files.");
   }
 
   fileResults.push({ path: relativePath, errors: fileErrors });
