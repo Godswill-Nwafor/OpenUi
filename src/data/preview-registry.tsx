@@ -44,6 +44,7 @@ import {
   AnalyticsDashboardPreview, AdminPanelPreview, KanbanBoardPreview,
   DataTablePreview, UserProfilePreview,
 } from "@/components/library/dashboards";
+import { StatusBadgePreview } from "@/components/library/badges";
 
 type Config = { render: () => ReactNode; scale: number; bg: string };
 
@@ -130,6 +131,9 @@ const configs: Record<string, Config> = {
   "kanban-board":           { render: () => <KanbanBoardPreview />,        scale: 0.22, bg: dark },
   "data-table":             { render: () => <DataTablePreview />,          scale: 0.22, bg: dark },
   "user-profile-dashboard": { render: () => <UserProfilePreview />,        scale: 0.22, bg: dark },
+
+  // Badges — light bg
+  "status-badge": { render: () => <StatusBadgePreview />, scale: 0.75, bg: light },
 };
 
 /** Card thumbnail — scaled down into h-44 */

@@ -27,8 +27,10 @@ export const contributors: Contributor[] = [
       "search-form", "settings-form",
       // Navbars
       "tabs-nav", "top-navbar",
+      // Badges
+      "status-badge",
     ],
-    contributionCount: 12,
+    contributionCount: 13,
     joinedAt: "2026-06-25",
   },
   {
