@@ -414,7 +414,7 @@ export function MyButton({
 
 ```bash
 # Clone and install
-git clone https://github.com/Mtu-Cse406-OpenSource-team/Openui.git
+git clone https://github.com/Godswill-Nwafor/OpenUi.git
 cd openui-hub
 npm install
 
@@ -448,4 +448,4 @@ Your name and GitHub profile are credited on the component's detail page for as 
 
 ---
 
-Questions? Open an issue or start a [Discussion](https://github.com/Mtu-Cse406-OpenSource-team/Openui/discussions).
+Questions? Open an issue or start a [Discussion](https://github.com/Godswill-Nwafor/OpenUi/discussions).

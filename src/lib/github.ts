@@ -1,5 +1,5 @@
-const REPO_OWNER = "Mtu-Cse406-OpenSource-team";
-const REPO_NAME = "Openui";
+const REPO_OWNER = "Godswill-Nwafor";
+const REPO_NAME = "OpenUi";
 
 export function getGitHubAvatarUrl(username: string, size = 80): string {
   return `https://github.com/${username}.png?size=${size}`;

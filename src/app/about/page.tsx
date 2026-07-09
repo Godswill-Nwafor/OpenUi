@@ -111,16 +111,16 @@ export default function AboutPage() {
         <section>
           <h2 className="text-3xl font-bold mb-3">Team and Contributors</h2>
           <p className="text-muted-foreground mb-8">
-            OpenUI Hub is built and maintained by this team of developers from{" "}
+            OpenUI Hub is built and maintained by{" "}
             <a
-              href="https://github.com/Mtu-Cse406-OpenSource-team"
+              href="https://github.com/Godswill-Nwafor"
               target="_blank"
               rel="noopener noreferrer"
               className="text-brand hover:underline font-medium"
             >
-              Mtu CSE406 Open Source Team
-            </a>
-            .
+              Godswill Nwafor
+            </a>{" "}
+            and this team of contributors.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             {team.map((member) => (

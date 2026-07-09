@@ -205,7 +205,7 @@ openui/
 
 ```bash
 # Clone the repository
-git clone https://github.com/Mtu-Cse406-OpenSource-team/Openui.git
+git clone https://github.com/Godswill-Nwafor/OpenUi.git
 cd openui-hub
 
 # Install dependencies
@@ -247,7 +247,7 @@ Every approved component permanently displays:
 
 ## License
 
-MIT © [OpenUI Hub Contributors](https://github.com/Mtu-Cse406-OpenSource-team/Openui/graphs/contributors)
+MIT © [OpenUI Hub Contributors](https://github.com/Godswill-Nwafor/OpenUi/graphs/contributors)
 
 See [LICENSE](LICENSE) for the full license text.
 

@@ -40,5 +40,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/Mtu-Cse406-OpenSource-team/Openui/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/Mtu-Cse406-OpenSource-team/Openui/releases/tag/v1.0.0
+[Unreleased]: https://github.com/Godswill-Nwafor/OpenUi/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Godswill-Nwafor/OpenUi/releases/tag/v1.0.0
