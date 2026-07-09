@@ -30,7 +30,6 @@
     "validate:metadata": "node scripts/validate-metadata.js"
   },
   "dependencies": {
-    "@next/swc-win32-x64-msvc": "^16.2.6",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.460.0",
