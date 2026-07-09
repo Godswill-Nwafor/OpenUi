@@ -12,9 +12,9 @@ import { GITHUB_REPO } from "@/lib/constants";
 // ── Code examples ─────────────────────────────────────────────────────────────
 
 const folderStructure = `ComponentName/
-├── ComponentName.tsx     # React + TypeScript component
+├── ComponentName.<ext>   # Your component source — any language/framework
 ├── metadata.json         # Required component metadata
-├── README.md             # Documentation (Purpose, Props, Usage)
+├── README.md             # Documentation (Installation, Usage, Props)
 └── preview.png           # Screenshot or preview image`;
 
 const submissionsStructure = `submissions/
@@ -38,20 +38,20 @@ const metadataExample = `{
 }`;
 
 const gitCommands = `# 1. Fork and clone
-git clone https://github.com/YOUR_USERNAME/Openui.git
-cd Openui && npm install
+git clone https://github.com/YOUR_USERNAME/OpenUi.git
+cd OpenUi && npm install
 
 # 2. Create a feature branch
 git checkout -b feature/MyButtonComponent
 
-# 3. Build your component
+# 3. Build your component — any language/framework
 mkdir submissions/MyButtonComponent
-# Create MyButtonComponent.tsx, metadata.json, README.md, preview.png
+# Create MyButtonComponent.<ext>, metadata.json, README.md, preview.png
 
 # 4. Validate locally before submitting
 node scripts/validate-component.js submissions/MyButtonComponent
 
-# 5. Run standard CI checks
+# 5. Run standard CI checks (for .ts/.tsx/.js/.jsx submissions)
 npm run lint && npm run type-check
 
 # 6. Commit and push
@@ -77,8 +77,8 @@ const steps = [
     desc: "Create your component folder inside submissions/ with all four required files.",
   },
   {
-    icon: Code2, step: "04", title: "Use React + TypeScript + Tailwind",
-    desc: "Write your component with the required tech stack. No other frameworks or styling libraries.",
+    icon: Code2, step: "04", title: "Use Any Language or Framework",
+    desc: "React, Vue, Angular, Svelte, plain HTML/CSS, vanilla JS — build it however you like. React and HTML/CSS get a live interactive preview; everything else displays as code + docs.",
   },
   {
     icon: CheckCircle, step: "05", title: "Validate Locally",
@@ -92,21 +92,16 @@ const steps = [
 
 // ── Tech stack data ───────────────────────────────────────────────────────────
 
-const allowedStack = [
-  { label: "React", detail: "Component framework — required" },
-  { label: "TypeScript (.tsx only)", detail: "Language — no .jsx or .js files" },
-  { label: "Tailwind CSS", detail: "Styling — required, no other CSS frameworks" },
-  { label: "Next.js", detail: "Project framework" },
-  { label: "Lucide React", detail: "Recommended icon library" },
+const livePreviewStack = [
+  { label: "React (TypeScript or JavaScript)", detail: ".tsx / .jsx — renders live in the app" },
+  { label: "Plain HTML/CSS", detail: ".html + optional .css — renders live in a sandboxed iframe" },
 ];
 
-const notAllowedStack = [
-  { label: "JavaScript (.jsx / .js)", detail: "TypeScript only" },
-  { label: "Vue / Angular / Svelte", detail: "React only" },
-  { label: "Bootstrap / Foundation", detail: "Tailwind CSS only" },
-  { label: "jQuery", detail: "Not accepted" },
-  { label: "Flutter / Dart", detail: "React web only" },
-  { label: "Plain HTML / CSS", detail: "Framework required" },
+const codeOnlyStack = [
+  { label: "Vue", detail: ".vue — accepted, code + docs only for now" },
+  { label: "Angular", detail: ".ts components — accepted, code + docs only for now" },
+  { label: "Svelte", detail: ".svelte — accepted, code + docs only for now" },
+  { label: "Vanilla JS, jQuery, or anything else", detail: "accepted, code + docs only" },
 ];
 
 // ── Naming data ───────────────────────────────────────────────────────────────
@@ -118,13 +113,13 @@ const namingWrong   = ["button", "button2", "newcomponent", "component-test", "m
 
 const validationChecklist = [
   "Component compiles without build errors",
-  "TypeScript passes with no errors (npm run type-check)",
-  "ESLint passes with no errors (npm run lint)",
+  "TypeScript passes with no errors, if you used TypeScript (npm run type-check)",
+  "ESLint passes with no errors, if you used JS/TS (npm run lint)",
   "Folder structure is correct (ComponentName/ with all 4 required files)",
   "metadata.json exists and all 10 required fields are populated",
-  "README.md exists and includes Installation, Usage, and Props sections",
+  "README.md exists and includes at least Installation and Usage sections",
   "preview.png exists (screenshot of the rendered component)",
-  "Component is built with React + TypeScript + Tailwind CSS",
+  "metadata.json accurately reflects the language/framework/styling you actually used",
   "Component name follows PascalCase convention",
   "Component is responsive across mobile, tablet, and desktop",
   "Component follows accessibility best practices (ARIA attributes, keyboard nav)",
@@ -138,10 +133,10 @@ const metadataFields = [
   { field: "description", note: "What the component does" },
   { field: "author", note: "Your full name or display name" },
   { field: "githubUsername", note: "Your GitHub username, used for attribution" },
-  { field: "category", note: "One of the valid project categories" },
-  { field: 'framework: "React"', note: "Must be exactly React" },
-  { field: 'language: "TypeScript"', note: "Must be exactly TypeScript" },
-  { field: 'styling: "Tailwind CSS"', note: "Must be exactly Tailwind CSS" },
+  { field: "category", note: "Lowercase-kebab-case slug — new categories are auto-registered" },
+  { field: "framework", note: 'Whatever you built it with, e.g. "React", "Vue", "HTML/CSS"' },
+  { field: "language", note: 'e.g. "TypeScript", "JavaScript", "HTML"' },
+  { field: "styling", note: 'e.g. "Tailwind CSS", "CSS", "Sass"' },
   { field: 'version: "1.0.0"', note: "Semantic version — start at 1.0.0" },
   { field: "tags: []", note: "Array of descriptive tags for search" },
 ];
@@ -227,19 +222,19 @@ export function ContributePageClient() {
             <h2 className="text-3xl font-bold">Supported Tech Stack</h2>
           </div>
           <p className="text-muted-foreground mb-8">
-            OpenUI Hub v1.0 <strong className="text-foreground">only accepts</strong> components built with the
-            official project stack. Automated validation checks for these requirements on every PR.
-            Submissions that use any other stack will be rejected.
+            OpenUI Hub accepts components built with <strong className="text-foreground">any language or framework</strong>.
+            Automated validation checks your submission's structure — folder layout, required files, complete
+            metadata — not your tech-stack choice.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-5">
             <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-5">
               <div className="flex items-center gap-2 mb-4">
                 <CheckCircle size={16} className="text-emerald-500" />
-                <h3 className="font-semibold text-emerald-500">Required — Accepted</h3>
+                <h3 className="font-semibold text-emerald-500">Gets a Live Preview</h3>
               </div>
               <ul className="space-y-3">
-                {allowedStack.map(({ label, detail }) => (
+                {livePreviewStack.map(({ label, detail }) => (
                   <li key={label} className="flex items-start gap-3">
                     <CheckCircle size={13} className="text-emerald-500 mt-0.5 shrink-0" />
                     <div>
@@ -251,15 +246,15 @@ export function ContributePageClient() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-red-500/30 bg-red-500/5 p-5">
+            <div className="rounded-2xl border border-border bg-card p-5">
               <div className="flex items-center gap-2 mb-4">
-                <XCircle size={16} className="text-red-500" />
-                <h3 className="font-semibold text-red-500">Not Accepted in v1.0</h3>
+                <FileText size={16} className="text-muted-foreground" />
+                <h3 className="font-semibold">Accepted — Code + Docs Only</h3>
               </div>
               <ul className="space-y-3">
-                {notAllowedStack.map(({ label, detail }) => (
+                {codeOnlyStack.map(({ label, detail }) => (
                   <li key={label} className="flex items-start gap-3">
-                    <XCircle size={13} className="text-red-500 mt-0.5 shrink-0" />
+                    <FileText size={13} className="text-muted-foreground mt-0.5 shrink-0" />
                     <div>
                       <span className="font-medium text-sm">{label}</span>
                       <span className="text-xs text-muted-foreground ml-2">— {detail}</span>
@@ -273,9 +268,10 @@ export function ContributePageClient() {
           <div className="mt-4 flex gap-3 p-4 rounded-xl border border-amber-500/30 bg-amber-500/5">
             <AlertCircle size={15} className="text-amber-500 shrink-0 mt-0.5" />
             <p className="text-sm text-muted-foreground">
-              <strong className="text-amber-400">Version 1.0 policy:</strong> Future versions may support additional
-              frameworks. For now, only React + TypeScript + Tailwind CSS is accepted.
-              Components that do not use this stack will fail automated validation and cannot be merged.
+              <strong className="text-amber-400">Why the split:</strong> React renders directly in this Next.js app,
+              and plain HTML/CSS renders safely in a sandboxed iframe — both are real, working previews. Other
+              frameworks would need their own runtime bundled into the gallery to render live; until that happens,
+              they're still fully accepted, just shown as code + documentation instead.
             </p>
           </div>
         </section>
@@ -298,8 +294,8 @@ export function ContributePageClient() {
           <div className="mt-5 grid sm:grid-cols-2 gap-3">
             {[
               {
-                file: "ComponentName.tsx",
-                desc: "The React + TypeScript component. File name must match the folder name exactly (PascalCase).",
+                file: "ComponentName.<ext>",
+                desc: "Your component source, in any language/framework (.tsx, .jsx, .vue, .svelte, .html, ...). File name must match the folder name exactly (PascalCase).",
               },
               {
                 file: "metadata.json",
@@ -307,7 +303,7 @@ export function ContributePageClient() {
               },
               {
                 file: "README.md",
-                desc: "Documentation: Purpose, Installation, Usage, Props, Dependencies, and Example.",
+                desc: "Documentation: at minimum Installation and Usage. Add Props if your component takes configurable inputs.",
               },
               {
                 file: "preview.png",
@@ -358,9 +354,9 @@ export function ContributePageClient() {
             <h2 className="text-3xl font-bold">Naming Conventions</h2>
           </div>
           <p className="text-muted-foreground mb-8">
-            All component names, folder names, and <code className="text-brand text-sm">.tsx</code> file names
-            must use <strong className="text-foreground">PascalCase</strong>.
-            The folder name, file name, and exported function name must all match exactly.
+            All component names, folder names, and source file names
+            must use <strong className="text-foreground">PascalCase</strong>, whatever extension you use.
+            The folder name, file name, and exported component/function name (where applicable) must all match exactly.
             Automated validation rejects any submission that does not follow this convention.
           </p>
 
@@ -454,8 +450,8 @@ export function ContributePageClient() {
                 desc: "Write self-documenting code with clear variable names. Avoid unnecessary complexity or abstraction.",
               },
               {
-                title: "TypeScript types",
-                desc: "All props must be typed with explicit interfaces. No implicit any. Export prop types for external use.",
+                title: "Strong typing where applicable",
+                desc: "If you used TypeScript, type all props with explicit interfaces — no implicit any. Export prop types for external use.",
               },
               {
                 title: "Accessibility",
@@ -463,15 +459,15 @@ export function ContributePageClient() {
               },
               {
                 title: "Dark mode support",
-                desc: "Use CSS variables (bg-background, text-foreground) or Tailwind dark: variants — not hard-coded colors.",
+                desc: "Use CSS variables (bg-background, text-foreground) or dark: variants — not hard-coded colors.",
               },
               {
                 title: "Full documentation",
-                desc: "Every prop documented in README.md with type, default, and description. Include a working example.",
+                desc: "Every prop documented in README.md with type, default, and description (if applicable). Include a working example.",
               },
               {
                 title: "Responsive design",
-                desc: "Component must work correctly on mobile, tablet, and desktop. Use Tailwind responsive breakpoints.",
+                desc: "Component must work correctly on mobile, tablet, and desktop, using whatever breakpoint approach your styling method supports.",
               },
             ].map(({ title, desc }) => (
               <div key={title} className="flex gap-3 p-4 rounded-xl border border-border">
@@ -490,7 +486,7 @@ export function ContributePageClient() {
           <h2 className="text-2xl font-bold mb-3">Ready to contribute?</h2>
           <p className="text-muted-foreground mb-6 max-w-md mx-auto text-sm">
             Your GitHub profile is permanently credited on every component you submit.
-            Fork the repo, build with React + TypeScript + Tailwind, validate locally, and open a PR.
+            Fork the repo, build with any language or framework, validate locally, and open a PR.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
