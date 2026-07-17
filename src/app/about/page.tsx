@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { Github, Heart, Layers, Star, Users, GitPullRequest, ArrowRight } from "lucide-react";
+import { Github, Heart, Layers, Star, Users, GitPullRequest, ArrowRight, GraduationCap } from "lucide-react";
 import { GITHUB_REPO, SITE_STATS } from "@/lib/constants";
 import { contributors } from "@/data/contributors";
 import { AvatarImage } from "@/components/ui/AvatarImage";
@@ -164,6 +165,40 @@ export default function AboutPage() {
               Start contributing
             </Link>
           </p>
+        </section>
+
+        {/* Acknowledgments */}
+        <section>
+          <h2 className="text-3xl font-bold mb-5">Acknowledgments</h2>
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-6 rounded-2xl border border-border bg-card">
+            <div className="relative shrink-0">
+              <Image
+                src="/dr-chinwe-igiri.webp"
+                alt="Dr. Chinwe Peace Igiri"
+                width={112}
+                height={112}
+                className="w-28 h-28 rounded-2xl object-cover border-2 border-brand/20 shadow-lg shadow-brand/10"
+              />
+              <span
+                className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-brand flex items-center justify-center border-2 border-card shadow-sm"
+                title="CSE 406 Open Source Lecturer, Guardian & Supervisor"
+              >
+                <GraduationCap size={15} className="text-white" />
+              </span>
+            </div>
+            <div className="text-center sm:text-left">
+              <p className="font-semibold text-lg">Dr. Chinwe Peace Igiri</p>
+              <p className="text-sm text-brand font-medium mb-3">
+                CSE 406 Open Source Lecturer, Guardian &amp; Supervisor
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                OpenUI Hub began as a CSE 406 Open Source course project, under her guidance. Her
+                direction gave rise to the idea of building this open-source component library, and
+                her mentorship shaped how the team approached it. We&apos;re grateful for her
+                contribution to this project&apos;s success.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* CTA */}

@@ -236,6 +236,12 @@ Every approved component permanently displays:
 
 ---
 
+## Acknowledgments
+
+OpenUI Hub began as a CSE 406 Open Source course project, under the guidance of **Dr. Chinwe Peace Igiri**, our CSE 406 Open Source lecturer, guardian, and supervisor. Her support and direction gave rise to the idea of building this open-source component library, and her mentorship shaped how the team approached it. We're grateful for her contribution to this project's success.
+
+---
+
 ## License
 
 MIT © [OpenUI Hub Contributors](https://github.com/Godswill-Nwafor/OpenUi/graphs/contributors)
