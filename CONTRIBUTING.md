@@ -16,6 +16,7 @@ Thank you for contributing to OpenUI Hub! This document covers everything you ne
 - [Coding Standards](#coding-standards)
 - [Development Setup](#development-setup)
 - [Component Attribution](#component-attribution)
+- [Acknowledgments](#acknowledgments)
 
 ---
 
@@ -477,6 +478,12 @@ Every approved component permanently displays contributor information in the com
 - **Category** — from your `metadata.json`
 
 Your name and GitHub profile are credited on the component's detail page for as long as OpenUI Hub exists.
+
+---
+
+## Acknowledgments
+
+OpenUI Hub began as a CSE 406 Open Source course project, under the guidance of **Dr. Chinwe Peace Igiri**, our CSE 406 Open Source lecturer, guardian, and supervisor, whose direction gave rise to this project's idea.
 
 ---
 

@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
-import { Github, Heart, Layers, Star, Users, GitPullRequest, ArrowRight } from "lucide-react";
+import { Github, Heart, Layers, Star, Users, GitPullRequest, ArrowRight, GraduationCap } from "lucide-react";
 import { GITHUB_REPO, SITE_STATS } from "@/lib/constants";
 import { contributors } from "@/data/contributors";
 import { AvatarImage } from "@/components/ui/AvatarImage";
@@ -164,6 +164,23 @@ export default function AboutPage() {
               Start contributing
             </Link>
           </p>
+        </section>
+
+        {/* Acknowledgments */}
+        <section>
+          <h2 className="text-3xl font-bold mb-5">Acknowledgments</h2>
+          <div className="flex gap-4 p-6 rounded-2xl border border-border bg-card">
+            <div className="w-12 h-12 rounded-2xl bg-brand/10 text-brand flex items-center justify-center shrink-0">
+              <GraduationCap size={22} />
+            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              OpenUI Hub began as a CSE 406 Open Source course project, under the guidance of{" "}
+              <strong className="text-foreground">Dr. Chinwe Peace Igiri</strong>, our CSE 406 Open
+              Source lecturer, guardian, and supervisor. Her direction gave rise to the idea of
+              building this open-source component library, and her mentorship shaped how the team
+              approached it. We&apos;re grateful for her contribution to this project&apos;s success.
+            </p>
+          </div>
         </section>
 
         {/* CTA */}
